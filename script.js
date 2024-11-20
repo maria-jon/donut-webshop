@@ -86,8 +86,11 @@ function printProductsList() {
     increaseButtons.forEach(button => {
       button.addEventListener('click', increaseProductCount);
     });
-  
-    // TODO: Gör samma för "decrease-button", dvs. vid klick minska antalet
+
+    const decreaseButtons = document.querySelectorAll('button.decrease');
+    decreaseButtons.forEach(button => {
+      button.addEventListener('click', decreaseProductCount);
+    });
 }
 
 printProductsList();
@@ -109,10 +112,25 @@ function increaseProductCount(e) {
     // öka dess amount med +1
     products[foundProductIndex].amount += 1;
   
-    // Skriv ut produktlistan
-    // Alternativ 1
-    // document.querySelector(`#input-${productId}`).value = products[foundProductIndex].amount;
-  
-    // Alternativ 2
     printProductsList();
-  }
+}
+
+function decreaseProductCount(e) {
+    const productId = Number(e.target.id.replace('decrease-', ''));
+    console.log('clicked on button with id', productId);
+    // Leta rätt på produkten i arrayen som har det id:t
+    const foundProductIndex = products.findIndex(product => product.id === productId);
+    console.log('found product at index', foundProductIndex);
+  
+    // Om produkten inte finns, skriv ut felmeddelande i consolen
+    // och avbryt att resten av koden körs med "return"
+    if (foundProductIndex === -1) {
+      console.error('Det finns ingen sådan produkt i produktlistan! Kolla att id:t är rätt.');
+      return;
+    }
+  
+    // minska dess amount med -1
+    products[foundProductIndex].amount -= 1;
+  
+    printProductsList();
+}
