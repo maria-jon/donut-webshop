@@ -7,7 +7,7 @@ const products = [
     amount: 0,
     category: 'sweet',
     img: {
-      url: "./public/images/annie-spratt-jstQCOhzyQA-unsplash.jpg",
+      url: "./images/annie-spratt-jstQCOhzyQA-unsplash.jpg",
       width: 1000,
       height: 450,
       alt: 'Stack of donuts'
@@ -21,7 +21,7 @@ const products = [
     amount: 0,
     category: 'sweet',
     img: {
-      url: "./public/images/elena-koycheva-PFzy4N0_R3M-unsplash.jpg",
+      url: "./images/elena-koycheva-PFzy4N0_R3M-unsplash.jpg",
       width: 500,
       height: 500,
       alt: 'Two donuts'
@@ -35,7 +35,105 @@ const products = [
     amount: 0,
     category: 'sweet',
     img: {
-      url: "./public/images/annie-spratt-jstQCOhzyQA-unsplash.jpg",
+      url: "./images/annie-spratt-jstQCOhzyQA-unsplash.jpg",
+      width: 1000,
+      height: 450,
+      alt: 'Stack of donuts'
+    },
+  },
+  {
+    id: 3,
+    name: 'Product 4',
+    price: 30,
+    rating: 1.5,
+    amount: 0,
+    category: 'sweet',
+    img: {
+      url: "./images/annie-spratt-jstQCOhzyQA-unsplash.jpg",
+      width: 1000,
+      height: 450,
+      alt: 'Stack of donuts'
+    },
+  },
+  {
+    id: 4,
+    name: 'Product 5',
+    price: 30,
+    rating: 1.5,
+    amount: 0,
+    category: 'sweet',
+    img: {
+      url: "./images/annie-spratt-jstQCOhzyQA-unsplash.jpg",
+      width: 1000,
+      height: 450,
+      alt: 'Stack of donuts'
+    },
+  },
+  {
+    id: 5,
+    name: 'Product 6',
+    price: 30,
+    rating: 1.5,
+    amount: 0,
+    category: 'sweet',
+    img: {
+      url: "./images/annie-spratt-jstQCOhzyQA-unsplash.jpg",
+      width: 1000,
+      height: 450,
+      alt: 'Stack of donuts'
+    },
+  },
+  {
+    id: 6,
+    name: 'Product 7',
+    price: 30,
+    rating: 1.5,
+    amount: 0,
+    category: 'sweet',
+    img: {
+      url: "./images/annie-spratt-jstQCOhzyQA-unsplash.jpg",
+      width: 1000,
+      height: 450,
+      alt: 'Stack of donuts'
+    },
+  },
+  {
+    id: 7,
+    name: 'Product 8',
+    price: 30,
+    rating: 1.5,
+    amount: 0,
+    category: 'sweet',
+    img: {
+      url: "./images/annie-spratt-jstQCOhzyQA-unsplash.jpg",
+      width: 1000,
+      height: 450,
+      alt: 'Stack of donuts'
+    },
+  },
+  {
+    id: 8,
+    name: 'Product 9',
+    price: 30,
+    rating: 1.5,
+    amount: 0,
+    category: 'sweet',
+    img: {
+      url: "./images/annie-spratt-jstQCOhzyQA-unsplash.jpg",
+      width: 1000,
+      height: 450,
+      alt: 'Stack of donuts'
+    },
+  },
+  {
+    id: 9,
+    name: 'Product 10',
+    price: 30,
+    rating: 1.5,
+    amount: 0,
+    category: 'sweet',
+    img: {
+      url: "./images/annie-spratt-jstQCOhzyQA-unsplash.jpg",
       width: 1000,
       height: 450,
       alt: 'Stack of donuts'
