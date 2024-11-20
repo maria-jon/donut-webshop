@@ -1,13 +1,86 @@
 <!doctype html>
-<html lang="en">
+<html lang="sv">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <link rel="stylesheet" href="style.scss">
+    <title>Gottfrids webshop</title>
   </head>
   <body>
-    <div id="app"></div>
+    
+    <header> 
+        <h1>Gottfrids webshop</h1>
+        <button>cart</button>
+        <div id="cart-summary">
+            <p>Varukorgssammanställning</p>
+            <!--- lista med produkter som man lagt i varukorgen - generera med js --->
+        </div>
+    </header>
+
+    <main>
+		<section>
+			<h2>Produkter</h2>
+			<div id="products-list">
+				<!--- fyller på från javascript --->
+			</div>
+		</section>
+        <section>
+            <h2>Beställningsformulär</h2>
+            <form>
+                <span>Obligatoriska uppgifter är markerade med *.</span>
+                <label>
+                    Förnamn: 
+                    <input type="text" name="first-name">
+                </label>
+                <label>
+                    Efternamn: 
+                    <input type="text" name="last-name">
+                </label>
+                <label>
+                    Adress: 
+                    <input type="text" name="address">
+                </label>
+                <label>
+                    Postnummer: 
+                    <input type="number" name="postcode">
+                </label>
+                <label>Ev. portkod:
+                    <input type="text" name="code">
+                </label>
+                <label>
+                    Telefon: 
+                    <input type="tel" name="phone">
+                </label>
+                <label>
+                    Email: 
+                    <input type="email" name="email">
+                </label>
+                <label>
+                    Betalsätt: 
+                    Faktura
+                    Kort
+                </label>
+                <label>
+                    Godkänn att vi behandlar dina personuppgifter
+                    <input type="checkbox" name="data">
+                </label>
+                <label>
+                    Jag vill gärna ha ert nyhetsbrev!
+                    <input type="checkbox" name="newsletter" checked>
+                </label>
+                <label>
+                    Rabattkod:
+                    <input type="text" name="discount">
+                </label>
+                <div class="form-buttons">
+                    <input type="reset" value="Rensa info">
+                    <input type="submit" value="Beställ">
+                </div>
+            </form>
+        </section>
+	</main>
+
     <script type="module" src="/main.js"></script>
   </body>
 </html>
