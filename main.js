@@ -162,10 +162,11 @@ function getRatingHtml(rating) {
 
 function printProductsList() {
   // Rensa div:en på befintliga produkter innan utskrift av uppdaterad information
-  productsListDiv.innerHTML = '';
+
+  let newHTML = ``;
 
   products.forEach(product => {
-    productsListDiv.innerHTML += `
+    newHTML += `
       <article class="product">
         <h3>${product.name}</h3>
         <p>${product.price} kr</p>
@@ -179,6 +180,8 @@ function printProductsList() {
       </article>
     `;
   });
+
+  productsListDiv.innerHTML = newHTML;
 
   const increaseButtons = document.querySelectorAll('button.increase');
   increaseButtons.forEach(button => {
