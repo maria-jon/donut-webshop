@@ -7,7 +7,7 @@ const products = [
     amount: 0,
     category: 'sweet',
     img: {
-      url: './assets/images/annie-spratt-jstQCOhzyQA-unsplash.jpg',
+      url: './assets/annie-spratt-jstQCOhzyQA-unsplash.jpg',
       width: 1000,
       height: 450,
       alt: 'Stack of donuts'
@@ -21,7 +21,7 @@ const products = [
     amount: 0,
     category: 'sweet',
     img: {
-      url: './assets/images/elena-koycheva-PFzy4N0_R3M-unsplash.jpg',
+      url: './assets/elena-koycheva-PFzy4N0_R3M-unsplash.jpg',
       width: 500,
       height: 500,
       alt: 'Two donuts'
@@ -35,7 +35,7 @@ const products = [
     amount: 0,
     category: 'sweet',
     img: {
-      url: './assets/images/annie-spratt-jstQCOhzyQA-unsplash.jpg',
+      url: './assets/annie-spratt-jstQCOhzyQA-unsplash.jpg',
       width: 1000,
       height: 450,
       alt: 'Stack of donuts'
