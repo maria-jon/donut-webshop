@@ -7,7 +7,7 @@ const products = [
       amount: 0,
       category: 'sweet',
       img: {
-        url: 'assets/images/assets/images/annie-spratt-jstQCOhzyQA-unsplash.jpg',
+        url: 'assets/images/annie-spratt-jstQCOhzyQA-unsplash.jpg',
         width: 1000,
         height: 450,
         alt: 'Stack of donuts'
@@ -22,8 +22,8 @@ const products = [
       category: 'sweet',
       img: {
         url: 'assets/images/elena-koycheva-PFzy4N0_R3M-unsplash.jpg',
-        width: 1000,
-        height: 450,
+        width: 500,
+        height: 500,
         alt: 'Two donuts'
       },
     },
@@ -35,7 +35,7 @@ const products = [
       amount: 0,
       category: 'sweet',
       img: {
-        url: 'assets/images/assets/images/annie-spratt-jstQCOhzyQA-unsplash.jpg',
+        url: 'assets/images/annie-spratt-jstQCOhzyQA-unsplash.jpg',
         width: 1000,
         height: 450,
         alt: 'Stack of donuts'
@@ -47,6 +47,20 @@ const products = [
   const productsListDiv = document.querySelector('#products-list');
 
 // ------------ PRINT PRODUCTS IN HTML ------------
+
+function getRatingHtml(rating) {
+    // If has half star rating; detect by checking for dot/decimal
+    const isHalf = String(rating).indexOf('.');
+  
+    let html = '';
+    for (let i = 0; i < rating; i++) {
+      html += `<span>⭐</span>`;
+    }
+    if (isHalf !== -1) {
+      html += `<span>💩</span>`; // should be half star
+    }
+    return html;
+}
 
 function printProductsList() {
     // Rensa div:en på befintliga produkter innan utskrift av uppdaterad information
@@ -67,6 +81,38 @@ function printProductsList() {
         </article>
       `;
     });
+
+    const increaseButtons = document.querySelectorAll('button.increase');
+    increaseButtons.forEach(button => {
+      button.addEventListener('click', increaseProductCount);
+    });
+  
+    // TODO: Gör samma för "decrease-button", dvs. vid klick minska antalet
 }
 
 printProductsList();
+
+function increaseProductCount(e) {
+    const productId = Number(e.target.id.replace('increase-', ''));
+    console.log('clicked on button with id', productId);
+    // Leta rätt på produkten i arrayen som har det id:t
+    const foundProductIndex = products.findIndex(product => product.id === productId);
+    console.log('found product at index', foundProductIndex);
+  
+    // Om produkten inte finns, skriv ut felmeddelande i consolen
+    // och avbryt att resten av koden körs med "return"
+    if (foundProductIndex === -1) {
+      console.error('Det finns ingen sådan produkt i produktlistan! Kolla att id:t är rätt.');
+      return;
+    }
+  
+    // öka dess amount med +1
+    products[foundProductIndex].amount += 1;
+  
+    // Skriv ut produktlistan
+    // Alternativ 1
+    // document.querySelector(`#input-${productId}`).value = products[foundProductIndex].amount;
+  
+    // Alternativ 2
+    printProductsList();
+  }
