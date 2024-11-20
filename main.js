@@ -7,7 +7,7 @@ const products = [
     amount: 0,
     category: 'sweet',
     img: {
-      url: ""./assets/cat.png",
+      url: "./assets/cat.png",
       width: 1000,
       height: 450,
       alt: 'Stack of donuts'
@@ -35,7 +35,7 @@ const products = [
     amount: 0,
     category: 'sweet',
     img: {
-      url: ""./assets/annie-spratt-jstQCOhzyQA-unsplash.jpg",
+      url: "./assets/annie-spratt-jstQCOhzyQA-unsplash.jpg",
       width: 1000,
       height: 450,
       alt: 'Stack of donuts'
