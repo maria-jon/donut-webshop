@@ -7,3 +7,8 @@ img {
 	height: auto;
 	display: block;
 }
+
+form {
+    display: flex;
+    flex-direction: column;
+}
