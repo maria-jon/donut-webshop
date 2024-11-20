@@ -152,10 +152,16 @@ function getRatingHtml(rating) {
 
   let html = '';
   for (let i = 0; i < rating; i++) {
-    html += `<span>⭐</span>`;
+    html += `
+    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;">
+      star
+    </span>`;
   }
   if (isHalf !== -1) {
-    html += `<span>💩</span>`; // should be half star
+    html += `
+    <span class="material-symbols-outlined">
+      star_half
+    </span>`; // should be half star
   }
   return html;
 }
