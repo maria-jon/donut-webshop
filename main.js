@@ -4,7 +4,7 @@ const products = [
     name: 'Jordgubbsmagi',
     price: 10,
     rating: 4,
-    amount: 0,
+    amount: 1,
     category: 'sweet',
     img: {
       url: "./images/annie-spratt-jstQCOhzyQA-unsplash.jpg",
@@ -143,6 +143,8 @@ const products = [
 
 // ------------ HTML ELEMENTS ------------
 const productsListDiv = document.querySelector('#products-list');
+const cartSummaryDiv = document.querySelector('#cart-summary');
+console.log(cartSummaryDiv);
 
 // ------------ PRINT PRODUCTS IN HTML ------------
 
@@ -219,6 +221,7 @@ function printProductsList() {
 // Print products 
 printProductsList();
 
+// Increase amount
 function increaseProductCount(e) {
   const productId = Number(e.target.id.replace('increase-', ''));
   // console.log('clicked on button with id', productId);
@@ -239,6 +242,7 @@ function increaseProductCount(e) {
   printProductsList();
 }
 
+// Decrease amount
 function decreaseProductCount(e) {
   const productId = Number(e.target.id.replace('decrease-', ''));
   // console.log('clicked on button with id', productId);
@@ -259,3 +263,20 @@ function decreaseProductCount(e) {
   printProductsList();
 }
 
+function printCartSummary() {
+  // Clear div of products
+  let newHTML = ``;
+
+  products.forEach(product => {
+    newHTML += `
+      <ul class="cart-item">
+        <li>${product.name}</li>
+        <li>${product.price} kr</li>
+        <li>Omdöme: ${getRatingHtml(product.rating)}</li>
+        <li>${product.amount}</li>
+      </ul>
+    `;
+  });
+
+  cartSummaryDiv.innerHTML = newHTML;
+}
