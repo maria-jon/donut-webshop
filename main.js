@@ -141,12 +141,15 @@ const products = [
   },
 ];
 
-console.table(products);
-
 // ------------ HTML ELEMENTS ------------
 const productsListDiv = document.querySelector('#products-list');
 const cartSummaryDiv = document.querySelector('#cart-summary');
-const productsSortDiv = document.querySelector('#sort-products');
+const productsSortDiv = document.querySelector('#filter-products');
+
+// const productsListing = document.querySelector('#productsListing');
+const categoryFilterRadios = document.querySelectorAll('[name="categoryFilter"]');
+const priceRangeSlider = document.querySelector('#priceRange');
+const currentRangeValue = document.querySelector('#currentRangeValue'); // priset som skrivs ut vid slidern
 
 // ------------ PRINT PRODUCTS IN HTML ------------
 
@@ -265,20 +268,36 @@ function decreaseProductCount(e) {
   printProductsList();
 }
 
+// ------------ FILTER PRODUCTS ------------
+
+products.sort((product1, product2) => {return product1.price > product2.price});
+console.table(products);
+
+// ------------ CART SUMMARY ------------
+
 function printCartSummary() {
   // Clear div of products
-  let newHTML = ``;
+  cartSummaryDiv.innerHTML = '';
 
   products.forEach(product => {
-    newHTML += `
-      <ul class="cart-item">
-        <li>${product.name}</li>
-        <li>${product.price} kr</li>
-        <li>Omdöme: ${getRatingHtml(product.rating)}</li>
-        <li>${product.amount}</li>
-      </ul>
+    // Create list item
+    const listItem = document.createElement('div');
+    listItem.className = 'product-item';
+
+    listItem.innerHTML = `
+        <span>${product.name}</span>
+        <span>${product.price} kr</span>
+        <span>${product.amount}</span>
+        <button onclick="decreaseProductCount(${product.id})">-</button>
+        <span>${product.amount}</span>
+        <button onclick="increaseProductCount(${product.id})">+</button>
     `;
+    // Append item to the product list div
+    cartSummaryDiv.appendChild(listItem);
   });
 
   cartSummaryDiv.innerHTML = newHTML;
 }
+
+
+printCartSummary();

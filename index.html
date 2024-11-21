@@ -23,8 +23,35 @@
 
 		<section>
 			<h2>Produkter</h2>
-            <div id="sort-products">
-
+            <div id="filter-products">
+                <label>
+                    <input type="radio" name="categoryFilter" value="sweet" />
+                    Sweet
+                </label>
+                <label>
+                    <input type="radio" name="categoryFilter" value="sour" />
+                    Sour
+                </label>
+                <label>
+                    <input type="radio" name="categoryFilter" value="vegan" />
+                    Vegan
+                </label>
+                <label>
+                    <input type="radio" name="categoryFilter" value="all" checked /> 
+                    All
+                </label>
+                
+                <p>
+                    <label>
+                        <span>Prisintervall</span>
+                        <span class="flex">
+                            <span>0 kr</span>
+                            <input type="range" min="0" max="500" id="priceRange" /> <!--- Här kan man sätta step="10" för att sätta intervall på slidern --->
+                            <span>500 kr</span>
+                        </span>
+                        <span id="currentRangeValue">500</span>kr
+                    </label>
+                </p>
             </div>
 			<div id="products-list">
 				<!--- fyller på från javascript --->
