@@ -47,7 +47,7 @@ const products = [
     price: 35,
     rating: 4.5,
     amount: 0,
-    category: 'sweet',
+    category: 'sour',
     img: {
       url: "./images/annie-spratt-jstQCOhzyQA-unsplash.jpg",
       width: 1000,
@@ -75,7 +75,7 @@ const products = [
     price: 10,
     rating: 3,
     amount: 0,
-    category: 'sweet',
+    category: 'vegan',
     img: {
       url: "./images/annie-spratt-jstQCOhzyQA-unsplash.jpg",
       width: 1000,
@@ -103,7 +103,7 @@ const products = [
     price: 35,
     rating: 4,
     amount: 0,
-    category: 'sweet',
+    category: 'vegan',
     img: {
       url: "./images/annie-spratt-jstQCOhzyQA-unsplash.jpg",
       width: 1000,
@@ -117,7 +117,7 @@ const products = [
     price: 15,
     rating: 2,
     amount: 0,
-    category: 'sweet',
+    category: 'vegan',
     img: {
       url: "./images/annie-spratt-jstQCOhzyQA-unsplash.jpg",
       width: 1000,
@@ -131,7 +131,7 @@ const products = [
     price: 25,
     rating: 4.5,
     amount: 0,
-    category: 'sweet',
+    category: 'sour',
     img: {
       url: "./images/annie-spratt-jstQCOhzyQA-unsplash.jpg",
       width: 1000,
@@ -141,10 +141,12 @@ const products = [
   },
 ];
 
+console.table(products);
+
 // ------------ HTML ELEMENTS ------------
 const productsListDiv = document.querySelector('#products-list');
 const cartSummaryDiv = document.querySelector('#cart-summary');
-console.log(cartSummaryDiv);
+const productsSortDiv = document.querySelector('#sort-products');
 
 // ------------ PRINT PRODUCTS IN HTML ------------
 
