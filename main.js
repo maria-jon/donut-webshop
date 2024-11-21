@@ -184,8 +184,7 @@ function getRatingHtml(rating) {
 }
 
 function printProductsList() {
-  // Rensa div:en på befintliga produkter innan utskrift av uppdaterad information
-
+  // Clear div of products
   let newHTML = ``;
 
   products.forEach(product => {
@@ -217,23 +216,24 @@ function printProductsList() {
   });
 }
 
+// Print products 
 printProductsList();
 
 function increaseProductCount(e) {
   const productId = Number(e.target.id.replace('increase-', ''));
   // console.log('clicked on button with id', productId);
-  // Leta rätt på produkten i arrayen som har det id:t
+  // Find product in array 
   const foundProductIndex = products.findIndex(product => product.id === productId);
   // console.log('found product at index', foundProductIndex);
 
-  // Om produkten inte finns, skriv ut felmeddelande i consolen
-  // och avbryt att resten av koden körs med "return"
+  // If product does not exist, error in console
+  // and stop rest of code
   if (foundProductIndex === -1) {
     console.error('Det finns ingen sådan produkt i produktlistan! Kolla att id:t är rätt.');
     return;
   }
 
-  // öka dess amount med +1
+  // add amount with +1
   products[foundProductIndex].amount += 1;
 
   printProductsList();
@@ -242,19 +242,20 @@ function increaseProductCount(e) {
 function decreaseProductCount(e) {
   const productId = Number(e.target.id.replace('decrease-', ''));
   // console.log('clicked on button with id', productId);
-  // Leta rätt på produkten i arrayen som har det id:t
+  // Find product in array 
   const foundProductIndex = products.findIndex(product => product.id === productId);
   // console.log('found product at index', foundProductIndex);
 
-  // Om produkten inte finns, skriv ut felmeddelande i consolen
-  // och avbryt att resten av koden körs med "return"
+  // If product does not exist, error in console
+  // and stop rest of code
   if (foundProductIndex === -1) {
     console.error('Det finns ingen sådan produkt i produktlistan! Kolla att id:t är rätt.');
     return;
   }
 
-  // minska dess amount med -1
+  // decrease amount with -1
   products[foundProductIndex].amount -= 1;
 
   printProductsList();
 }
+
