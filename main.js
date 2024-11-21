@@ -1,7 +1,7 @@
 const products = [
   {
     id: 0,
-    name: 'Product 1',
+    name: 'Jordgubbsmagi',
     price: 10,
     rating: 4,
     amount: 0,
@@ -15,7 +15,7 @@ const products = [
   },
   {
     id: 1,
-    name: 'Product 2',
+    name: 'Chokladfrossa',
     price: 20,
     rating: 3,
     amount: 0,
@@ -29,7 +29,7 @@ const products = [
   },
   {
     id: 2,
-    name: 'Product 3',
+    name: 'Honungsglädje',
     price: 30,
     rating: 1.5,
     amount: 0,
@@ -43,9 +43,9 @@ const products = [
   },
   {
     id: 3,
-    name: 'Product 4',
-    price: 30,
-    rating: 1.5,
+    name: 'Regnbågsring',
+    price: 35,
+    rating: 4.5,
     amount: 0,
     category: 'sweet',
     img: {
@@ -57,9 +57,9 @@ const products = [
   },
   {
     id: 4,
-    name: 'Product 5',
-    price: 30,
-    rating: 1.5,
+    name: 'Kanelfluff',
+    price: 20,
+    rating: 2.5,
     amount: 0,
     category: 'sweet',
     img: {
@@ -71,9 +71,9 @@ const products = [
   },
   {
     id: 5,
-    name: 'Product 6',
-    price: 30,
-    rating: 1.5,
+    name: 'Sockersöt',
+    price: 10,
+    rating: 3,
     amount: 0,
     category: 'sweet',
     img: {
@@ -85,9 +85,9 @@ const products = [
   },
   {
     id: 6,
-    name: 'Product 7',
+    name: 'Vaniljdröm',
     price: 30,
-    rating: 1.5,
+    rating: 3.5,
     amount: 0,
     category: 'sweet',
     img: {
@@ -99,9 +99,9 @@ const products = [
   },
   {
     id: 7,
-    name: 'Product 8',
-    price: 30,
-    rating: 1.5,
+    name: 'Karamellsnurra',
+    price: 35,
+    rating: 4,
     amount: 0,
     category: 'sweet',
     img: {
@@ -113,9 +113,9 @@ const products = [
   },
   {
     id: 8,
-    name: 'Product 9',
-    price: 30,
-    rating: 1.5,
+    name: 'Päronpärla',
+    price: 15,
+    rating: 2,
     amount: 0,
     category: 'sweet',
     img: {
@@ -127,9 +127,9 @@ const products = [
   },
   {
     id: 9,
-    name: 'Product 10',
-    price: 30,
-    rating: 1.5,
+    name: 'Citronkyss',
+    price: 25,
+    rating: 4.5,
     amount: 0,
     category: 'sweet',
     img: {
@@ -147,22 +147,39 @@ const productsListDiv = document.querySelector('#products-list');
 // ------------ PRINT PRODUCTS IN HTML ------------
 
 function getRatingHtml(rating) {
-  // If has half star rating; detect by checking for dot/decimal
-  const isHalf = String(rating).indexOf('.');
+  // Calculate number of full stars
+  const fullStars = Math.floor(rating);
+  // Check if there's a half star
+  const hasHalfStar = rating % 1 !== 0;
+  // Calculate empty stars
+  const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
 
   let html = '';
-  for (let i = 0; i < rating; i++) {
+
+  // Add full stars
+  for (let i = 0; i < fullStars; i++) {
     html += `
     <span class="material-icons">
       star
     </span>`;
   }
-  if (isHalf !== -1) {
+
+  // Add half star if applicable
+  if (hasHalfStar) {
     html += `
     <span class="material-icons">
       star_half
-    </span>`; // should be half star
+    </span>`;
   }
+
+  // Add empty stars
+  for (let i = 0; i < emptyStars; i++) {
+    html += `
+    <span class="material-icons">
+      star_border
+    </span>`;
+  }
+
   return html;
 }
 
@@ -175,9 +192,9 @@ function printProductsList() {
     newHTML += `
       <article class="product">
         <h3>${product.name}</h3>
-        <p>${product.price} kr</p>
-        <p>Rating: ${getRatingHtml(product.rating)}</p>
         <img src="${product.img.url}" alt="${product.img.alt}">
+        <span>${product.price} kr</span>
+        <p>Omdöme: ${getRatingHtml(product.rating)}</p>
         <div>
           <button class="decrease" id="decrease-${product.id}">decrease</button>
           <input type="number" min="0" value="${product.amount}" id="input-${product.id}">
