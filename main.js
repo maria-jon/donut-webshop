@@ -143,13 +143,55 @@ const products = [
 
 // ------------ HTML ELEMENTS ------------
 const productsListDiv = document.querySelector('#products-list');
-const cartSummaryDiv = document.querySelector('#cart-summary');
+// const cartSummaryDiv = document.querySelector('#cart-summary');
 const productsSortDiv = document.querySelector('#filter-products');
 
 // const productsListing = document.querySelector('#productsListing');
 const categoryFilterRadios = document.querySelectorAll('[name="categoryFilter"]');
 const priceRangeSlider = document.querySelector('#priceRange');
 const currentRangeValue = document.querySelector('#currentRangeValue'); // priset som skrivs ut vid slidern
+
+
+// ------------ SHOW PRODUCTS IN CART ------------
+const cart = document.querySelector('#cart-summary');
+function updateAndPrintCart() {
+
+  /*
+  ATT GÖRA
+  x en container i html (id/html-element) där produkterna skrivs ut
+  x produkter som har minst 1 i antal: filter (for-loop)
+  x loop för att skriva ut produkterna
+  - totalsumma
+  - om det inte finns några produkter så ska det skrivas ut att varukorgen är tom
+  */
+
+  // Alternativ 2: for-loop
+  const purchasedProducts = [];
+  for (let i = 0; i < products.length; i++) {
+    const product = products[i];
+    if (product.amount > 0) {
+      purchasedProducts.push(product);
+    }
+  }
+
+  // Kontrollera vilka produkter vi har i consolen
+  console.log(purchasedProducts);
+
+  // Skriv ut produkterna
+  cart.innerHTML = ''; // Tömma div:en på ev. tidigare innehåll
+  purchasedProducts.forEach(product => {
+    cart.innerHTML += `
+      <div>
+        <img src="${product.img.url}" alt="${product.img.alt}">
+        ${product.name}: ${product.amount} st - ${product.amount * product.price} kr
+      </div>
+    `;
+  });
+
+  // TODO: Summa av alla produkter, tips: använd reduce
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
+}
+
 
 // ------------ PRINT PRODUCTS IN HTML ------------
 
@@ -241,7 +283,7 @@ function increaseProductCount(e) {
     return;
   }
 
-  // add amount with +1
+  // Increase amount with +1
   products[foundProductIndex].amount += 1;
 
   printProductsList();
@@ -262,7 +304,7 @@ function decreaseProductCount(e) {
     return;
   }
 
-  // decrease amount with -1
+  // Decrease amount with -1
   products[foundProductIndex].amount -= 1;
 
   printProductsList();
@@ -275,6 +317,14 @@ console.table(products);
 
 // ------------ CART SUMMARY ------------
 
+/* TO DO
+x en container i html där produkterna skrivs ut
+- produkter som har minst 1 i antal: filter (for-loop)
+- loop för att skriva ut produkterna 
+- totalsumma
+- om det inte finns några produkter så ska det skrivas ut att varukorgen är tom
+
+/*
 function printCartSummary() {
   // Clear div of products
   cartSummaryDiv.innerHTML = '';
@@ -301,3 +351,5 @@ function printCartSummary() {
 
 
 printCartSummary();
+
+*/
