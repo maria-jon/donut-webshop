@@ -4,7 +4,7 @@ const products = [
     name: 'Jordgubbsmagi',
     price: 10,
     rating: 4,
-    amount: 1,
+    amount: 0,
     category: 'sweet',
     img: {
       url: "./images/annie-spratt-jstQCOhzyQA-unsplash.jpg",
@@ -161,10 +161,20 @@ function updateAndPrintCart() {
   x en container i html (id/html-element) där produkterna skrivs ut
   x produkter som har minst 1 i antal: filter (for-loop)
   x loop för att skriva ut produkterna
-  - totalsumma
-  - om det inte finns några produkter så ska det skrivas ut att varukorgen är tom
+  x totalsumma
+  x om det inte finns några produkter så ska det skrivas ut att varukorgen är tom
   */
 
+  // Alternativ 1: använda filter-funktionen i arrayer
+  const purchasedProducts = products.filter((product) => product.amount > 0);
+
+  // Calculate total sum
+  const shippingCost = 0;
+  const totalSum = purchasedProducts.reduce((total, product) => {
+    return total + product.amount * product.price;
+  }, shippingCost);
+
+  /*
   // Alternativ 2: for-loop
   const purchasedProducts = [];
   for (let i = 0; i < products.length; i++) {
@@ -173,23 +183,28 @@ function updateAndPrintCart() {
       purchasedProducts.push(product);
     }
   }
+  */
 
   // Kontrollera vilka produkter vi har i consolen
-  console.log(purchasedProducts);
+  // console.log(purchasedProducts);
 
   // Skriv ut produkterna
   cart.innerHTML = ''; // Tömma div:en på ev. tidigare innehåll
   purchasedProducts.forEach(product => {
     cart.innerHTML += `
-      <div>
+      <div class="cart-item">
         <img src="${product.img.url}" alt="${product.img.alt}">
-        ${product.name}: ${product.amount} st - ${product.amount * product.price} kr
+        <span class="cart-name">${product.name}: </span> ${product.amount} st - ${product.amount * product.price} kr
       </div>
     `;
   });
 
-  // TODO: Summa av alla produkter, tips: använd reduce
-  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
+  // Display total sum in the cart
+  cart.innerHTML +=`
+    <div class="cart-total">
+      Totalpris: ${totalSum} kr
+    </div>
+  `;
 }
 
 
@@ -287,6 +302,8 @@ function increaseProductCount(e) {
   products[foundProductIndex].amount += 1;
 
   printProductsList();
+
+  updateAndPrintCart();
 }
 
 // Decrease amount
@@ -308,6 +325,7 @@ function decreaseProductCount(e) {
   products[foundProductIndex].amount -= 1;
 
   printProductsList();
+  updateAndPrintCart();
 }
 
 // ------------ FILTER PRODUCTS ------------
