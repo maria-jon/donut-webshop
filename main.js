@@ -190,16 +190,20 @@ function updateAndPrintCart() {
   }, 0 )
   console.log(shippingAmount);
 
+  const shippingPrice = (num1, num2) => totalSum * 0.10;
+  const totalShipping = (num1, num2) => shippingPrice + 25;
+
   if(shippingAmount > 14) {
+    return
     console.log('gratis');
   } else {
-    console.log('frakt');
+    shippingPrice();
+    console.log(shippingPrice(), 'kr');
   }
 
-  function printShipping() {
+  function addShipping() {
   
   } 
-
 
 
   /*
