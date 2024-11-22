@@ -141,7 +141,10 @@ const products = [
   },
 ];
 
-// ------------ HTML ELEMENTS ------------
+// ------------------------------------------------
+// ------------ HTML ELEMENTS ---------------------
+// ------------------------------------------------
+
 const productsListDiv = document.querySelector('#products-list');
 // const cartSummaryDiv = document.querySelector('#cart-summary');
 const productsSortDiv = document.querySelector('#filter-products');
@@ -151,8 +154,10 @@ const categoryFilterRadios = document.querySelectorAll('[name="categoryFilter"]'
 const priceRangeSlider = document.querySelector('#priceRange');
 const currentRangeValue = document.querySelector('#currentRangeValue'); // priset som skrivs ut vid slidern
 
+// ------------------------------------------------
+// ------------ SHOW PRODUCTS IN CART -------------
+// ------------------------------------------------
 
-// ------------ SHOW PRODUCTS IN CART ------------
 const cart = document.querySelector('#cart-summary');
 function updateAndPrintCart() {
 
@@ -169,10 +174,33 @@ function updateAndPrintCart() {
   const purchasedProducts = products.filter((product) => product.amount > 0);
 
   // Calculate total sum
-  const shippingCost = 0;
+  let shippingCost = 0;
   const totalSum = purchasedProducts.reduce((total, product) => {
     return total + product.amount * product.price;
   }, shippingCost);
+
+  /* frakt
+  - kolla antalet munkar i varukorg
+  - om det är mer än 15 > return
+  - om det är mindre än 15 > 25 kr + 10% av totalsumma
+  */
+
+  const shippingAmount = purchasedProducts.reduce((total, product) => {
+    return total + product.amount;
+  }, 0 )
+  console.log(shippingAmount);
+
+  if(shippingAmount > 14) {
+    console.log('gratis');
+  } else {
+    console.log('frakt');
+  }
+
+  function printShipping() {
+  
+  } 
+
+
 
   /*
   // Alternativ 2: for-loop
@@ -186,7 +214,7 @@ function updateAndPrintCart() {
   */
 
   // Kontrollera vilka produkter vi har i consolen
-  // console.log(purchasedProducts);
+  console.log(purchasedProducts);
 
   // Print products
   cart.innerHTML = ''; // Empty div of previous content
@@ -207,8 +235,9 @@ function updateAndPrintCart() {
   `;
 }
 
-
+// ------------------------------------------------
 // ------------ PRINT PRODUCTS IN HTML ------------
+// ------------------------------------------------
 
 function getRatingHtml(rating) {
   // Calculate number of full stars
@@ -328,7 +357,9 @@ function decreaseProductCount(e) {
   updateAndPrintCart();
 }
 
-// ------------ FILTER PRODUCTS ------------
+// ------------------------------------------------
+// ------------ FILTER PRODUCTS -------------------
+// ------------------------------------------------
 
 products.sort((product1, product2) => {return product1.price > product2.price});
 console.table(products);
