@@ -188,8 +188,8 @@ function updateAndPrintCart() {
   // Kontrollera vilka produkter vi har i consolen
   // console.log(purchasedProducts);
 
-  // Skriv ut produkterna
-  cart.innerHTML = ''; // Tömma div:en på ev. tidigare innehåll
+  // Print products
+  cart.innerHTML = ''; // Empty div of previous content
   purchasedProducts.forEach(product => {
     cart.innerHTML += `
       <div class="cart-item">
