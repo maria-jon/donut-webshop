@@ -180,9 +180,9 @@ function updateAndPrintCart() {
   }, shippingCost);
 
   /* frakt
-  - kolla antalet munkar i varukorg
-  - om det är mer än 15 > return
-  - om det är mindre än 15 > 25 kr + 10% av totalsumma
+  x kolla antalet munkar i varukorg
+  x om det är mer än 15 > return
+  x om det är mindre än 15 > 25 kr + 10% av totalsumma
   */
 
   const shippingAmount = purchasedProducts.reduce((total, product) => {
@@ -191,15 +191,20 @@ function updateAndPrintCart() {
   console.log(shippingAmount);
 
   const shippingPrice = (num1, num2) => totalSum * 0.10;
-  const totalShipping = (num1, num2) => shippingPrice + 25;
+  const totalShipping = (num1, num2) => shippingPrice() + 25;
 
   if(shippingAmount > 14) {
     return
     console.log('gratis');
   } else {
     shippingPrice();
+    totalShipping();
     console.log(shippingPrice(), 'kr');
+    console.log(totalShipping(),'kr');
   }
+
+
+  // lägga till frakten i varukorgssammanställningen
 
   function addShipping() {
   
