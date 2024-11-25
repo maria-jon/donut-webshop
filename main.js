@@ -160,7 +160,6 @@ const currentRangeValue = document.querySelector('#currentRangeValue'); // prise
 
 const cart = document.querySelector('#cart-summary');
 function updateAndPrintCart() {
-
   /*
   ATT GÖRA
   x en container i html (id/html-element) där produkterna skrivs ut
@@ -185,30 +184,32 @@ function updateAndPrintCart() {
   x om det är mindre än 15 > 25 kr + 10% av totalsumma
   */
 
+  // Räkna ut antal produkter i cart 
   const shippingAmount = purchasedProducts.reduce((total, product) => {
     return total + product.amount;
-  }, 0 )
-  console.log(shippingAmount);
+  }, 0);
+  console.log(`Antal i cart: ${shippingAmount}`);
 
-  const shippingPrice = (num1, num2) => totalSum * 0.10;
-  const totalShipping = (num1, num2) => shippingPrice() + 25;
+  // Räkna ut procent-kostnad på frakten
+  const shippingPrice = (totalSum) => {
+    return totalSum * 0.10;
+  };
 
-  if(shippingAmount > 14) {
-    return
-    console.log('gratis');
+  // Räkna ut total frakt
+  const calculateTotalShipping = (totalSum) => {
+    return shippingPrice(totalSum) + 25;
+  };
+
+  // Sätter frakt
+  let totalShipping;
+  if (shippingAmount < 15) {
+    totalShipping = calculateTotalShipping(totalSum);
+    // console.log(`shippingPrice: ${shippingPrice(totalSum)} kr`);
+    // console.log(`Total frakt: ${totalShipping} kr`);
   } else {
-    shippingPrice();
-    totalShipping();
-    console.log(shippingPrice(), 'kr');
-    console.log(totalShipping(),'kr');
+    totalShipping = 0; // mer än 15st = gratis
   }
 
-
-  // lägga till frakten i varukorgssammanställningen
-
-  function addShipping() {
-  
-  } 
 
 
   /*
@@ -225,8 +226,8 @@ function updateAndPrintCart() {
   // Kontrollera vilka produkter vi har i consolen
   console.log(purchasedProducts);
 
-  // Print products
-  cart.innerHTML = ''; // Empty div of previous content
+  // Skriva ut produkter
+  cart.innerHTML = ''; // Rensa div
   purchasedProducts.forEach(product => {
     cart.innerHTML += `
       <div class="cart-item">
@@ -236,10 +237,11 @@ function updateAndPrintCart() {
     `;
   });
 
-  // Display total sum in the cart
+  // Skriva ut totalsumma och frakt i cart
   cart.innerHTML +=`
     <div class="cart-total">
-      Totalpris: ${totalSum} kr
+      Pris: ${totalSum} kr
+      Frakt: ${totalShipping} kr
     </div>
   `;
 }
@@ -249,16 +251,16 @@ function updateAndPrintCart() {
 // ------------------------------------------------
 
 function getRatingHtml(rating) {
-  // Calculate number of full stars
+  // Räkna ut hur många hela stjärnor
   const fullStars = Math.floor(rating);
-  // Check if there's a half star
+  // Kolla om det finns en halv stjärna
   const hasHalfStar = rating % 1 !== 0;
-  // Calculate empty stars
+  // Räkna ut tomma stjärnor
   const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
 
   let html = '';
 
-  // Add full stars
+  // Lägger till hela stjärnor
   for (let i = 0; i < fullStars; i++) {
     html += `
     <span class="material-icons">
@@ -266,7 +268,7 @@ function getRatingHtml(rating) {
     </span>`;
   }
 
-  // Add half star if applicable
+  // Lägger till ev halva stjärnor
   if (hasHalfStar) {
     html += `
     <span class="material-icons">
@@ -274,7 +276,7 @@ function getRatingHtml(rating) {
     </span>`;
   }
 
-  // Add empty stars
+  // Lägger till tomma stjärnor
   for (let i = 0; i < emptyStars; i++) {
     html += `
     <span class="material-icons">
@@ -286,7 +288,7 @@ function getRatingHtml(rating) {
 }
 
 function printProductsList() {
-  // Clear div of products
+  // rensa div
   let newHTML = ``;
 
   products.forEach(product => {
@@ -318,25 +320,25 @@ function printProductsList() {
   });
 }
 
-// Print products 
+// Skriver ut produkter
 printProductsList();
 
-// Increase amount
+// Öka antal
 function increaseProductCount(e) {
   const productId = Number(e.target.id.replace('increase-', ''));
   // console.log('clicked on button with id', productId);
-  // Find product in array 
+  // Hitta produkt i array
   const foundProductIndex = products.findIndex(product => product.id === productId);
   // console.log('found product at index', foundProductIndex);
 
-  // If product does not exist, error in console
-  // and stop rest of code
+  // Om produkten inte finns, visa felmeddelande
+  // och pausa resten av koden
   if (foundProductIndex === -1) {
     console.error('Det finns ingen sådan produkt i produktlistan! Kolla att id:t är rätt.');
     return;
   }
 
-  // Increase amount with +1
+  // Öka antal med +1
   products[foundProductIndex].amount += 1;
 
   printProductsList();
@@ -344,22 +346,22 @@ function increaseProductCount(e) {
   updateAndPrintCart();
 }
 
-// Decrease amount
+// Minska antal 
 function decreaseProductCount(e) {
   const productId = Number(e.target.id.replace('decrease-', ''));
   // console.log('clicked on button with id', productId);
-  // Find product in array 
+  // Hitta produkt i array
   const foundProductIndex = products.findIndex(product => product.id === productId);
   // console.log('found product at index', foundProductIndex);
 
-  // If product does not exist, error in console
-  // and stop rest of code
+  // Om produkten inte finns, visa felmeddelande
+  // och pausa resten av koden
   if (foundProductIndex === -1) {
     console.error('Det finns ingen sådan produkt i produktlistan! Kolla att id:t är rätt.');
     return;
   }
 
-  // Decrease amount with -1
+  // Minska antal med -1
   products[foundProductIndex].amount -= 1;
 
   printProductsList();
@@ -373,41 +375,3 @@ function decreaseProductCount(e) {
 products.sort((product1, product2) => {return product1.price > product2.price});
 console.table(products);
 
-// ------------ CART SUMMARY ------------
-
-/* TO DO
-x en container i html där produkterna skrivs ut
-- produkter som har minst 1 i antal: filter (for-loop)
-- loop för att skriva ut produkterna 
-- totalsumma
-- om det inte finns några produkter så ska det skrivas ut att varukorgen är tom
-
-/*
-function printCartSummary() {
-  // Clear div of products
-  cartSummaryDiv.innerHTML = '';
-
-  products.forEach(product => {
-    // Create list item
-    const listItem = document.createElement('div');
-    listItem.className = 'product-item';
-
-    listItem.innerHTML = `
-        <span>${product.name}</span>
-        <span>${product.price} kr</span>
-        <span>${product.amount}</span>
-        <button onclick="decreaseProductCount(${product.id})">-</button>
-        <span>${product.amount}</span>
-        <button onclick="increaseProductCount(${product.id})">+</button>
-    `;
-    // Append item to the product list div
-    cartSummaryDiv.appendChild(listItem);
-  });
-
-  cartSummaryDiv.innerHTML = newHTML;
-}
-
-
-printCartSummary();
-
-*/
