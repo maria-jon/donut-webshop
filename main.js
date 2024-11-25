@@ -154,6 +154,8 @@ const categoryFilterRadios = document.querySelectorAll('[name="categoryFilter"]'
 const priceRangeSlider = document.querySelector('#priceRange');
 const currentRangeValue = document.querySelector('#currentRangeValue'); // priset som skrivs ut vid slidern
 
+const today = new Date();
+
 // ------------------------------------------------
 // ------------ SHOW PRODUCTS IN CART -------------
 // ------------------------------------------------
@@ -210,6 +212,38 @@ function updateAndPrintCart() {
     totalShipping = 0; // mer än 15st = gratis
   }
 
+  // Räkna ut totalsumman
+  const totalOrderSum = totalSum + totalShipping;
+
+  /* Måndagsrabatt
+  - är det måndag?
+  - om det inte är måndag > return
+  - är det mellan 03:00 och 10:00? (&& och ===)
+  - om det inte är det > return
+  - annars > 10 % rabatt på beställningssumman (visa i sammanfattningen)
+  */
+ 
+  if (today.getDay() != 1) { // om det inte är måndag
+    return
+  } else if (today.getHours() >= 11) { // om klockan är mer än 11
+    return
+  } else if (today.getHours() >= 3)  { // om klockan är mer än 03
+    console.log('Det är måndag morgon, så du får 10 % rabatt på din beställning:', totalOrderSum * 0.1, 'kr. Totalsumman blir:', totalOrderSum * 0.9, 'kr.');
+  }
+
+
+  /* helghöjning
+  - är det fredag, lördag, söndag, eller måndag?
+  - om det är fredag innan 15:00 > return
+  - om det är måndag efter 03:00 > return
+  - annars > 15% extra pris på produkterna
+  */
+
+  /* mängdrabatt (filter/find)
+  - kolla antalet munkar för varje produkt
+  - om värdet är mindre än 10 > return
+  - om värdet 'antal munkar' för ett visst namn/produkt är mer än tio > 10% rabatt på summan av den munken
+  */
 
 
   /*
@@ -240,8 +274,9 @@ function updateAndPrintCart() {
   // Skriva ut totalsumma och frakt i cart
   cart.innerHTML +=`
     <div class="cart-total">
-      Pris: ${totalSum} kr
-      Frakt: ${totalShipping} kr
+      <span>Pris: ${totalSum} kr </span>
+      <span>Frakt: ${totalShipping} kr </span>
+      <span>Totalt: ${totalOrderSum}</span>
     </div>
   `;
 }
