@@ -149,10 +149,12 @@ const productsListDiv = document.querySelector('#products-list');
 // const cartSummaryDiv = document.querySelector('#cart-summary');
 const productsSortDiv = document.querySelector('#filter-products');
 
-// const productsListing = document.querySelector('#productsListing');
 const categoryFilterRadios = document.querySelectorAll('[name="categoryFilter"]');
 const priceRangeSlider = document.querySelector('#priceRange');
 const currentRangeValue = document.querySelector('#currentRangeValue'); // priset som skrivs ut vid slidern
+
+let filteredProducts = [...products];
+let filteredProductsInPriceRange = [...products]; // alla produkter
 
 const today = new Date();
 
@@ -342,7 +344,7 @@ function printProductsList() {
   // rensa div
   let newHTML = ``;
 
-  products.forEach(product => {
+  filteredProductsInPriceRange.forEach(product => {
     newHTML += `
       <article class="product">
         <h3>${product.name}</h3>
@@ -350,9 +352,9 @@ function printProductsList() {
         <span>${product.price} kr</span>
         <p>Omdöme: ${getRatingHtml(product.rating)}</p>
         <div>
-          <button class="decrease" id="decrease-${product.id}">decrease</button>
+          <button class="decrease" id="decrease-${product.id}">-</button>
           <input type="number" min="0" value="${product.amount}" id="input-${product.id}">
-          <button class="increase" id="increase-${product.id}">increase</button>
+          <button class="increase" id="increase-${product.id}">+</button>
         </div>
       </article>
     `;
@@ -423,6 +425,111 @@ function decreaseProductCount(e) {
 // ------------ FILTER PRODUCTS -------------------
 // ------------------------------------------------
 
-products.sort((product1, product2) => {return product1.price > product2.price});
+/**
+* Print product HTML.
+*/
+
+function renderProducts() {
+	productsListDiv.innerHTML = '';
+	
+	filteredProductsInPriceRange.forEach((product) => { // lägg till InRange
+		productsListDiv.innerHTML += `
+      <article class="product">
+        <h3>${product.name}</h3>
+        <img src="${product.img.url}" alt="${product.img.alt}">
+        <span>${product.price} kr</span>
+        <p>Omdöme: ${getRatingHtml(product.rating)}</p>
+        <div>
+          <button class="decrease" id="decrease-${product.id}">-</button>
+          <input type="number" min="0" value="${product.amount}" id="input-${product.id}">
+          <button class="increase" id="increase-${product.id}">+</button>
+        </div>
+      </article>
+		`;
+	});
+  
+  const increaseButtons = document.querySelectorAll('button.increase');
+  increaseButtons.forEach(button => {
+    button.addEventListener('click', increaseProductCount);
+  });
+
+  const decreaseButtons = document.querySelectorAll('button.decrease');
+  decreaseButtons.forEach(button => {
+    button.addEventListener('click', decreaseProductCount);
+  });
+}
+
+// ändra price range
+function changePriceRange() {
+	const currentPrice = priceRangeSlider.value;
+	currentRangeValue.innerHTML = currentPrice;
+	// console.log(currentPrice); // output: det ändrade värdet när man drar i slidern
+	
+	filteredProductsInPriceRange = filteredProducts.filter((product) => product.price <= currentPrice);
+	console.log(filteredProductsInPriceRange); // output: de objekt som stämmer överens med pris
+	renderProducts(); // skriva ut listan på nytt
+}
+
+
+/**
+* Update which products are shown
+*/
+// categories ['Sweet', 'Sour', 'Vegan']
+
+function updateCategoryFilter(e) {
+  const selectedCategory = e.currentTarget.value;
+  if (selectedCategory === 'All') {
+    filteredProducts = product;
+  } else {
+    filteredProducts = product.filter(prod => prod.category === selectedCategory);
+  }
+  changePriceRange();
+}
+
+/*
+function updateCategoryFilter(e) {
+	// Hämta värdet på vald radio button
+	const selectedCategory = e.currentTraget.value;
+	console.log(selectedCategory); 
+	
+	if (selectedCategory === 'all') {
+		filteredProducts = [...products]; // copy reference
+	} else {
+		// töm filtered products på tidigare filtrering
+		filteredProducts = [];
+		
+		// loopa igenom alla produkter
+		for (let i = 0; i < products.length; i++) {
+			const prod = products[i];
+			
+			// gör om kategorierna i varje produkt till lowercase
+			const catsInLowercase = [];
+			for (let j = 0; j < prod.category.length; j++) {
+				catsInLowercase.push(prod.category[j].toLowerCase());
+			}
+			// kolla om vald kategori finns med i listan
+			if (catsInLowercase.indexOf(selectedCategory) > -1) {
+				filteredProducts.push(prod);
+			}
+		}
+	}
+	changePriceRange();
+}
+*/
+// eventlyssnare för när man drar i slidern 
+priceRangeSlider.addEventListener('input', changePriceRange);
+
+// products.sort((product1, product2) => {return product1.price > product2.price});
 // console.table(products);
 
+/*
+function updateCategoryFilter(e) {
+  const selectedCat = e.currentTarget.value;
+  if (selectedCat === 'All') {
+    filteredProd = product;
+  } else {
+    filteredProd = product.filter(prod => prod.category === selectedCat);
+  }
+  changePriceRange();
+}
+*/
