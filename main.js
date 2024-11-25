@@ -153,6 +153,11 @@ const categoryFilterRadios = document.querySelectorAll('[name="categoryFilter"]'
 const priceRangeSlider = document.querySelector('#priceRange');
 const currentRangeValue = document.querySelector('#currentRangeValue'); // priset som skrivs ut vid slidern
 
+const sweetRadio = document.querySelector('#sweet-radio')
+const sourRadio = document.querySelector('#sour-radio')
+const veganRadio = document.querySelector('#vegan-radio')
+const allRadio = document.querySelector('#all-radio')
+
 let filteredProducts = [...products];
 let filteredProductsInPriceRange = [...products]; // alla produkter
 
@@ -466,7 +471,7 @@ function changePriceRange() {
 	// console.log(currentPrice); // output: det ändrade värdet när man drar i slidern
 	
 	filteredProductsInPriceRange = filteredProducts.filter((product) => product.price <= currentPrice);
-	console.log(filteredProductsInPriceRange); // output: de objekt som stämmer överens med pris
+	// console.log(filteredProductsInPriceRange); // output: de objekt som stämmer överens med pris
 	renderProducts(); // skriva ut listan på nytt
 }
 
@@ -476,21 +481,23 @@ function changePriceRange() {
 */
 // categories ['Sweet', 'Sour', 'Vegan']
 
+
 function updateCategoryFilter(e) {
   const selectedCategory = e.currentTarget.value;
   if (selectedCategory === 'All') {
-    filteredProducts = product;
+    filteredProductsInPriceRange = products;
   } else {
-    filteredProducts = product.filter(prod => prod.category === selectedCategory);
+    filteredProductsInPriceRange = products.filter(prod => prod.category === selectedCategory);
   }
   changePriceRange();
 }
 
+
 /*
 function updateCategoryFilter(e) {
 	// Hämta värdet på vald radio button
-	const selectedCategory = e.currentTraget.value;
-	console.log(selectedCategory); 
+	const selectedCategory = e.currentTarget.value;
+	// console.log(selectedCategory); 
 	
 	if (selectedCategory === 'all') {
 		filteredProducts = [...products]; // copy reference
@@ -504,8 +511,8 @@ function updateCategoryFilter(e) {
 			
 			// gör om kategorierna i varje produkt till lowercase
 			const catsInLowercase = [];
-			for (let j = 0; j < prod.category.length; j++) {
-				catsInLowercase.push(prod.category[j].toLowerCase());
+			for (let i = 0; i < prod.category.length; i++) {
+				catsInLowercase.push(prod.category[i].toLowerCase());
 			}
 			// kolla om vald kategori finns med i listan
 			if (catsInLowercase.indexOf(selectedCategory) > -1) {
@@ -518,6 +525,11 @@ function updateCategoryFilter(e) {
 */
 // eventlyssnare för när man drar i slidern 
 priceRangeSlider.addEventListener('input', changePriceRange);
+
+sweetRadio.addEventListener('click', updateCategoryFilter);
+sourRadio.addEventListener('click', updateCategoryFilter);
+veganRadio.addEventListener('click', updateCategoryFilter);
+allRadio.addEventListener('click', updateCategoryFilter);
 
 // products.sort((product1, product2) => {return product1.price > product2.price});
 // console.table(products);
