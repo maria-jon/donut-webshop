@@ -443,7 +443,6 @@ function filterProducts() {
   const selectedCategory =  document.querySelector('input[name="categoryFilter"]:checked').value; // säger vilken kategori som är vald 
   const selectedPrice = priceRangeSlider.value; // säger vilket pris som är valt 
 
-
   currentRangeValue.innerHTML = selectedPrice; // skriver ut valt pris
 
   filteredProducts = filteredProducts.filter(product => product.price <= selectedPrice); // filtrerar produkter från valt pris
