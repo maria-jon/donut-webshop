@@ -157,10 +157,10 @@ const sweetRadio = document.querySelector('#sweet-radio')
 const sourRadio = document.querySelector('#sour-radio')
 const veganRadio = document.querySelector('#vegan-radio')
 const allRadio = document.querySelector('#all-radio')
-
+/*
 let filteredProducts = [...products];
 let filteredProductsInPriceRange = [];
-
+*/
 const today = new Date();
 
 // ------------------------------------------------
@@ -393,11 +393,11 @@ function getRatingHtml(rating) {
   return html;
 }
 
-function printProductsList() {
+function printProductsList(productList) {
   // rensa div
   let newHTML = ``;
 
-  products.forEach(product => {
+  productList.forEach(product => {
     newHTML += `
       <article class="product">
         <h3>${product.name}</h3>
@@ -427,7 +427,7 @@ function printProductsList() {
 }
 
 // Skriver ut produkter
-printProductsList();
+printProductsList(products);
 
 
 
@@ -435,112 +435,33 @@ printProductsList();
 // ------------ FILTER PRODUCTS -------------------
 // ------------------------------------------------
 
-// ändra price range
-function changePriceRange() {
-  console.log('Filtrerade:', filteredProductsInPriceRange);
-    // rensa div
-    let newHTML = ``;
+function filterProducts() {
+  let filteredProducts = [...products];
 
-    // skriva ut produkterna
-    filteredProductsInPriceRange.forEach(product => {
-      newHTML += `
-        <article class="product">
-          <h3>${product.name}</h3>
-          <img src="${product.img.url}" alt="${product.img.alt}">
-          <span>${product.price} kr</span>
-          <p>Omdöme: ${getRatingHtml(product.rating)}</p>
-          <div>
-            <button class="decrease" id="decrease-${product.id}">-</button>
-            <input type="number" min="0" value="${product.amount}" id="input-${product.id}">
-            <button class="increase" id="increase-${product.id}">+</button>
-          </div>
-        </article>
-      `;
-    });
-  
-    productsListDiv.innerHTML = newHTML;
-  
-    const increaseButtons = document.querySelectorAll('button.increase');
-    increaseButtons.forEach(button => {
-      button.addEventListener('click', increaseProductCount);
-    });
-  
-    const decreaseButtons = document.querySelectorAll('button.decrease');
-    decreaseButtons.forEach(button => {
-      button.addEventListener('click', decreaseProductCount);
-    });
+  // Uppdatera filteredProducts utfirån val gjorda i gränssnittet
+  // const selectedCategory = document.querySelector('input[name="categoryFilter"]:checked').value; // säger vilken kategori som är vald 
+  const selectedCategory =  document.querySelector('input[name="categoryFilter"]:checked').value; // säger vilken kategori som är vald 
+  const selectedPrice = priceRangeSlider.value; // säger vilket pris som är valt 
 
-	const currentPrice = priceRangeSlider.value;
-	currentRangeValue.innerHTML = currentPrice;
-	// console.log(currentPrice); // output: det ändrade värdet när man drar i slidern
-	
-	filteredProductsInPriceRange = filteredProducts.filter((product) => product.price <= currentPrice);
-	console.log(filteredProductsInPriceRange); // output: de objekt som stämmer överens med pris
+
+  currentRangeValue.innerHTML = selectedPrice; // skriver ut valt pris
+
+  filteredProducts = filteredProducts.filter(product => product.price <= selectedPrice); // filtrerar produkter från valt pris
+
+  if (selectedCategory !== 'all') {
+    filteredProducts = filteredProducts.filter(product => product.category === selectedCategory); // filtrerar produkter från kategori om det inte är 'all' 
+  } 
+
+  printProductsList(filteredProducts);
 }
 
-
-/**
-* Update which products are shown
-*/
-// categories ['Sweet', 'Sour', 'Vegan']
-
-/*
- - filtrera på kategori OCH pris
-
- just nu filtrerar den enbart på kategori ELLER pris
-
- överväg att byta från slidern till något annat, typ lägsta-högsta pris ?
-*/
-
-function updateCategoryFilter(e) {
-  const selectedCategory = e.currentTarget.value;
-  console.log(selectedCategory);
-  if (selectedCategory === 'all') {
-    filteredProductsInPriceRange = products;
-  } else {
-    filteredProductsInPriceRange = products.filter(product => product.category === selectedCategory);
-  }
-  changePriceRange();
-}
-
-
-/*
-function updateCategoryFilter(e) {
-	// Hämta värdet på vald radio button
-	const selectedCategory = e.currentTarget.value;
-	console.log(selectedCategory); 
-	
-	if (selectedCategory === 'all') {
-		filteredProducts = [...products]; // copy reference
-	} else {
-		// töm filtered products på tidigare filtrering
-		filteredProducts = [];
-		
-		// loopa igenom alla produkter
-		for (let i = 0; i < products.length; i++) {
-			const prod = products[i];
-			
-			// gör om kategorierna i varje produkt till lowercase
-			const catsInLowercase = [];
-			for (let i = 0; i < prod.category.length; i++) {
-				catsInLowercase.push(prod.category[i].toLowerCase());
-			}
-			// kolla om vald kategori finns med i listan
-			if (catsInLowercase.indexOf(selectedCategory) > -1) {
-				filteredProducts.push(prod);
-			}
-		}
-	}
-	changePriceRange();
-}
-*/
 
 for (let i = 0; i < categoryFilterRadios.length; i++) {
-	categoryFilterRadios[i].addEventListener('click', updateCategoryFilter);
+	categoryFilterRadios[i].addEventListener('click', filterProducts);
 }
 
 // eventlyssnare för när man drar i slidern 
-priceRangeSlider.addEventListener('input', changePriceRange);
+priceRangeSlider.addEventListener('input', filterProducts);
 
 /*
 sweetRadio.addEventListener('click', updateCategoryFilter);
