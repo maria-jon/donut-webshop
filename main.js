@@ -168,6 +168,53 @@ const today = new Date();
 // ------------------------------------------------
 
 const cart = document.querySelector('#cart-summary');
+
+// ------------ ÖKA ANTAL -------------
+function increaseProductCount(e) {
+  const productId = Number(e.target.id.replace('increase-', ''));
+  // console.log('clicked on button with id', productId);
+  // Hitta produkt i array
+  const foundProductIndex = products.findIndex(product => product.id === productId);
+  // console.log('found product at index', foundProductIndex);
+
+  // Om produkten inte finns, visa felmeddelande
+  // och pausa resten av koden
+  if (foundProductIndex === -1) {
+    console.error('Det finns ingen sådan produkt i produktlistan! Kolla att id:t är rätt.');
+    return;
+  }
+
+  // Öka antal med +1
+  products[foundProductIndex].amount += 1;
+
+  printProductsList();
+
+  updateAndPrintCart();
+}
+
+// ------------ MINSKA ANTAL -------------
+function decreaseProductCount(e) {
+  const productId = Number(e.target.id.replace('decrease-', ''));
+  // console.log('clicked on button with id', productId);
+  // Hitta produkt i array
+  const foundProductIndex = products.findIndex(product => product.id === productId);
+  // console.log('found product at index', foundProductIndex);
+
+  // Om produkten inte finns, visa felmeddelande
+  // och pausa resten av koden
+  if (foundProductIndex === -1) {
+    console.error('Det finns ingen sådan produkt i produktlistan! Kolla att id:t är rätt.');
+    return;
+  }
+
+  // Minska antal med -1
+  products[foundProductIndex].amount -= 1;
+
+  printProductsList();
+  updateAndPrintCart();
+}
+
+// ------------ SKRIVA UT PRODUKTER I KORGEN -------------
 function updateAndPrintCart() {
   /*
   ATT GÖRA
@@ -191,7 +238,7 @@ function updateAndPrintCart() {
   }
 
 
-  // Calculate total sum
+  // Räkna ut total summa
   let shippingCost = 0;
   const totalSum = purchasedProducts.reduce((total, product) => {
     return total + product.amount * product.price;
@@ -308,6 +355,7 @@ function updateAndPrintCart() {
 // ------------ PRINT PRODUCTS IN HTML ------------
 // ------------------------------------------------
 
+// Skriva ut rating
 function getRatingHtml(rating) {
   // Räkna ut hur många hela stjärnor
   const fullStars = Math.floor(rating);
@@ -381,88 +429,11 @@ function printProductsList() {
 // Skriver ut produkter
 printProductsList();
 
-// Öka antal
-function increaseProductCount(e) {
-  const productId = Number(e.target.id.replace('increase-', ''));
-  // console.log('clicked on button with id', productId);
-  // Hitta produkt i array
-  const foundProductIndex = products.findIndex(product => product.id === productId);
-  // console.log('found product at index', foundProductIndex);
 
-  // Om produkten inte finns, visa felmeddelande
-  // och pausa resten av koden
-  if (foundProductIndex === -1) {
-    console.error('Det finns ingen sådan produkt i produktlistan! Kolla att id:t är rätt.');
-    return;
-  }
-
-  // Öka antal med +1
-  products[foundProductIndex].amount += 1;
-
-  printProductsList();
-
-  updateAndPrintCart();
-}
-
-// Minska antal 
-function decreaseProductCount(e) {
-  const productId = Number(e.target.id.replace('decrease-', ''));
-  // console.log('clicked on button with id', productId);
-  // Hitta produkt i array
-  const foundProductIndex = products.findIndex(product => product.id === productId);
-  // console.log('found product at index', foundProductIndex);
-
-  // Om produkten inte finns, visa felmeddelande
-  // och pausa resten av koden
-  if (foundProductIndex === -1) {
-    console.error('Det finns ingen sådan produkt i produktlistan! Kolla att id:t är rätt.');
-    return;
-  }
-
-  // Minska antal med -1
-  products[foundProductIndex].amount -= 1;
-
-  printProductsList();
-  updateAndPrintCart();
-}
 
 // ------------------------------------------------
 // ------------ FILTER PRODUCTS -------------------
 // ------------------------------------------------
-
-/**
-* Print product HTML.
-*/
-
-function renderProducts() {
-	productsListDiv.innerHTML = '';
-	
-	filteredProductsInPriceRange.forEach((product) => { // lägg till InRange
-		productsListDiv.innerHTML += `
-      <article class="product">
-        <h3>${product.name}</h3>
-        <img src="${product.img.url}" alt="${product.img.alt}">
-        <span>${product.price} kr</span>
-        <p>Omdöme: ${getRatingHtml(product.rating)}</p>
-        <div>
-          <button class="decrease" id="decrease-${product.id}">-</button>
-          <input type="number" min="0" value="${product.amount}" id="input-${product.id}">
-          <button class="increase" id="increase-${product.id}">+</button>
-        </div>
-      </article>
-		`;
-	});
-  
-  const increaseButtons = document.querySelectorAll('button.increase');
-  increaseButtons.forEach(button => {
-    button.addEventListener('click', increaseProductCount);
-  });
-
-  const decreaseButtons = document.querySelectorAll('button.decrease');
-  decreaseButtons.forEach(button => {
-    button.addEventListener('click', decreaseProductCount);
-  });
-}
 
 // ändra price range
 function changePriceRange() {
@@ -472,7 +443,8 @@ function changePriceRange() {
 	
 	filteredProductsInPriceRange = filteredProducts.filter((product) => product.price <= currentPrice);
 	// console.log(filteredProductsInPriceRange); // output: de objekt som stämmer överens med pris
-	renderProducts(); // skriva ut listan på nytt
+	// renderProducts(); // skriva ut listan på nytt
+  printProductsList();
 }
 
 
@@ -481,13 +453,12 @@ function changePriceRange() {
 */
 // categories ['Sweet', 'Sour', 'Vegan']
 
-
 function updateCategoryFilter(e) {
   const selectedCategory = e.currentTarget.value;
   if (selectedCategory === 'All') {
     filteredProductsInPriceRange = products;
   } else {
-    filteredProductsInPriceRange = products.filter(prod => prod.category === selectedCategory);
+    filteredProductsInPriceRange = products.filter(product => product.category === selectedCategory);
   }
   changePriceRange();
 }
