@@ -172,7 +172,17 @@ function updateAndPrintCart() {
   */
 
   // Alternativ 1: använda filter-funktionen i arrayer
-  const purchasedProducts = products.filter((product) => product.amount > 0);
+  // const purchasedProducts = products.filter((product) => product.amount > 0);
+
+  // Alternativ 2: for-loop
+  const purchasedProducts = [];
+  for (let i = 0; i < products.length; i++) {
+    const product = products[i];
+    if (product.amount > 0) {
+      purchasedProducts.push(product);
+    }
+  }
+
 
   // Calculate total sum
   let shippingCost = 0;
@@ -215,23 +225,6 @@ function updateAndPrintCart() {
   // Räkna ut totalsumman
   const totalOrderSum = totalSum + totalShipping;
 
-  /* Måndagsrabatt
-  - är det måndag?
-  - om det inte är måndag > return
-  - är det mellan 03:00 och 10:00? (&& och ===)
-  - om det inte är det > return
-  - annars > 10 % rabatt på beställningssumman (visa i sammanfattningen)
-  */
- 
-  if (today.getDay() != 1) { // om det inte är måndag
-    return
-  } else if (today.getHours() >= 11) { // om klockan är mer än 11
-    return
-  } else if (today.getHours() >= 3)  { // om klockan är mer än 03
-    console.log('Det är måndag morgon, så du får 10 % rabatt på din beställning:', totalOrderSum * 0.1, 'kr. Totalsumman blir:', totalOrderSum * 0.9, 'kr.');
-  }
-
-
   /* helghöjning
   - är det fredag, lördag, söndag, eller måndag?
   - om det är fredag innan 15:00 > return
@@ -239,26 +232,48 @@ function updateAndPrintCart() {
   - annars > 15% extra pris på produkterna
   */
 
-  /* mängdrabatt (filter/find)
-  - kolla antalet munkar för varje produkt
-  - om värdet är mindre än 10 > return
-  - om värdet 'antal munkar' för ett visst namn/produkt är mer än tio > 10% rabatt på summan av den munken
-  */
-
-
-  /*
-  // Alternativ 2: for-loop
-  const purchasedProducts = [];
-  for (let i = 0; i < products.length; i++) {
-    const product = products[i];
-    if (product.amount > 0) {
-      purchasedProducts.push(product);
+  // ------------------------------------------------
+  // ------------ MONDAY DISCOUNT -------------
+  // ------------------------------------------------
+  function mondayDiscount() {
+    /* Måndagsrabatt
+    x är det måndag?
+    x om det inte är måndag > return
+    x är det mellan 03:00 och 10:00? (&& och ===)
+    x om det inte är det > return
+    - annars > 10 % rabatt på beställningssumman (visa i sammanfattningen)
+    */
+   
+    if (today.getDay() != 1) { // om det inte är måndag
+      return
+    } else if (today.getHours() >= 10) { // om klockan är mer än 10
+      return
+    } else if (today.getHours() >= 3)  { // om klockan är mer än 03
+      console.log('Det är måndag morgon, så du får 10 % rabatt på din beställning:', totalOrderSum * 0.1, 'kr. Totalsumman blir:', totalOrderSum * 0.9, 'kr.');
     }
   }
-  */
+  mondayDiscount();
+
+  
+/*
+  function bulkDiscount() {
+    /* mängdrabatt (filter/find)
+     - kolla antalet munkar för varje produkt
+     - om värdet är mindre än 10 > return
+     - om värdet 'antal munkar' för ett visst namn/produkt är mer än tio > 10% rabatt på summan av den munken
+    
+
+    const purchasedProductsBulk = products.filter((product) => product.amount > 9);
+
+    console.log('bulk', purchasedProductsBulk);
+
+  }
+  bulkDiscount();
+*/
+
 
   // Kontrollera vilka produkter vi har i consolen
-  console.log(purchasedProducts);
+  console.log('purchased', purchasedProducts);
 
   // Skriva ut produkter
   cart.innerHTML = ''; // Rensa div
@@ -280,6 +295,7 @@ function updateAndPrintCart() {
     </div>
   `;
 }
+
 
 // ------------------------------------------------
 // ------------ PRINT PRODUCTS IN HTML ------------
@@ -408,5 +424,5 @@ function decreaseProductCount(e) {
 // ------------------------------------------------
 
 products.sort((product1, product2) => {return product1.price > product2.price});
-console.table(products);
+// console.table(products);
 
