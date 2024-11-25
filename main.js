@@ -159,7 +159,7 @@ const veganRadio = document.querySelector('#vegan-radio')
 const allRadio = document.querySelector('#all-radio')
 
 let filteredProducts = [...products];
-let filteredProductsInPriceRange = [...products]; // alla produkter
+let filteredProductsInPriceRange = [];
 
 const today = new Date();
 
@@ -397,7 +397,7 @@ function printProductsList() {
   // rensa div
   let newHTML = ``;
 
-  filteredProductsInPriceRange.forEach(product => {
+  products.forEach(product => {
     newHTML += `
       <article class="product">
         <h3>${product.name}</h3>
@@ -437,14 +437,45 @@ printProductsList();
 
 // ändra price range
 function changePriceRange() {
+  console.log('Filtrerade:', filteredProductsInPriceRange);
+    // rensa div
+    let newHTML = ``;
+
+    // skriva ut produkterna
+    filteredProductsInPriceRange.forEach(product => {
+      newHTML += `
+        <article class="product">
+          <h3>${product.name}</h3>
+          <img src="${product.img.url}" alt="${product.img.alt}">
+          <span>${product.price} kr</span>
+          <p>Omdöme: ${getRatingHtml(product.rating)}</p>
+          <div>
+            <button class="decrease" id="decrease-${product.id}">-</button>
+            <input type="number" min="0" value="${product.amount}" id="input-${product.id}">
+            <button class="increase" id="increase-${product.id}">+</button>
+          </div>
+        </article>
+      `;
+    });
+  
+    productsListDiv.innerHTML = newHTML;
+  
+    const increaseButtons = document.querySelectorAll('button.increase');
+    increaseButtons.forEach(button => {
+      button.addEventListener('click', increaseProductCount);
+    });
+  
+    const decreaseButtons = document.querySelectorAll('button.decrease');
+    decreaseButtons.forEach(button => {
+      button.addEventListener('click', decreaseProductCount);
+    });
+
 	const currentPrice = priceRangeSlider.value;
 	currentRangeValue.innerHTML = currentPrice;
 	// console.log(currentPrice); // output: det ändrade värdet när man drar i slidern
 	
 	filteredProductsInPriceRange = filteredProducts.filter((product) => product.price <= currentPrice);
-	// console.log(filteredProductsInPriceRange); // output: de objekt som stämmer överens med pris
-	// renderProducts(); // skriva ut listan på nytt
-  printProductsList();
+	console.log(filteredProductsInPriceRange); // output: de objekt som stämmer överens med pris
 }
 
 
@@ -453,9 +484,18 @@ function changePriceRange() {
 */
 // categories ['Sweet', 'Sour', 'Vegan']
 
+/*
+ - filtrera på kategori OCH pris
+
+ just nu filtrerar den enbart på kategori ELLER pris
+
+ överväg att byta från slidern till något annat, typ lägsta-högsta pris ?
+*/
+
 function updateCategoryFilter(e) {
   const selectedCategory = e.currentTarget.value;
-  if (selectedCategory === 'All') {
+  console.log(selectedCategory);
+  if (selectedCategory === 'all') {
     filteredProductsInPriceRange = products;
   } else {
     filteredProductsInPriceRange = products.filter(product => product.category === selectedCategory);
@@ -468,7 +508,7 @@ function updateCategoryFilter(e) {
 function updateCategoryFilter(e) {
 	// Hämta värdet på vald radio button
 	const selectedCategory = e.currentTarget.value;
-	// console.log(selectedCategory); 
+	console.log(selectedCategory); 
 	
 	if (selectedCategory === 'all') {
 		filteredProducts = [...products]; // copy reference
@@ -494,25 +534,17 @@ function updateCategoryFilter(e) {
 	changePriceRange();
 }
 */
+
+for (let i = 0; i < categoryFilterRadios.length; i++) {
+	categoryFilterRadios[i].addEventListener('click', updateCategoryFilter);
+}
+
 // eventlyssnare för när man drar i slidern 
 priceRangeSlider.addEventListener('input', changePriceRange);
 
+/*
 sweetRadio.addEventListener('click', updateCategoryFilter);
 sourRadio.addEventListener('click', updateCategoryFilter);
 veganRadio.addEventListener('click', updateCategoryFilter);
 allRadio.addEventListener('click', updateCategoryFilter);
-
-// products.sort((product1, product2) => {return product1.price > product2.price});
-// console.table(products);
-
-/*
-function updateCategoryFilter(e) {
-  const selectedCat = e.currentTarget.value;
-  if (selectedCat === 'All') {
-    filteredProd = product;
-  } else {
-    filteredProd = product.filter(prod => prod.category === selectedCat);
-  }
-  changePriceRange();
-}
 */
