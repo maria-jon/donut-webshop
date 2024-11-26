@@ -279,15 +279,9 @@ function updateAndPrintCart() {
   // Räkna ut totalsumman
   const totalOrderSum = totalSum + totalShipping;
 
-  /* helghöjning
-  - är det fredag, lördag, söndag, eller måndag?
-  - om det är fredag innan 15:00 > return
-  - om det är måndag efter 03:00 > return
-  - annars > 15% extra pris på produkterna
-  */
 
   // ------------------------------------------------
-  // ------------ MONDAY DISCOUNT -------------
+  // ------------ DISCOUNTS -------------
   // ------------------------------------------------
   function mondayDiscount() {
     /* Måndagsrabatt
@@ -309,13 +303,12 @@ function updateAndPrintCart() {
   mondayDiscount();
 
   
-/*
   function bulkDiscount() {
     /* mängdrabatt (filter/find)
-     - kolla antalet munkar för varje produkt
+     x kolla antalet munkar för varje produkt
      - om värdet är mindre än 10 > return
      - om värdet 'antal munkar' för ett visst namn/produkt är mer än tio > 10% rabatt på summan av den munken
-    
+    */
 
     const purchasedProductsBulk = products.filter((product) => product.amount > 9);
 
@@ -323,7 +316,28 @@ function updateAndPrintCart() {
 
   }
   bulkDiscount();
-*/
+
+
+  function weekendRaise() {
+    /* helghöjning
+      x är det fredag, lördag, söndag, eller måndag?
+      x om det är fredag innan 15:00 > return
+      x om det är måndag efter 03:00 > return
+      - annars > 15% extra pris på produkterna
+    */
+
+    if (today.getDay() == 2 || today.getDay() == 3 || today.getDay() == 4) { // om det inte är helg
+      return
+    } else if (today.getDay() == 5 && today.getHours() <= 15) { // om det är fredag innan kl 15
+      return
+    } else if (today.getDay() == 1 && today.getHours() >= 3) { // om det är måndag efter kl 03
+      return
+    } else {
+      console.log('Hemlig prishöjning:', totalOrderSum * 0.15, 'kr. Totalsumman blir:', totalOrderSum * 1.15, 'kr.');
+    }
+  }
+  weekendRaise();
+
 
 
   // Kontrollera vilka produkter vi har i consolen
