@@ -345,7 +345,7 @@ function updateAndPrintCart() {
     <div class="cart-total">
       <span>Pris: ${totalSum} kr </span>
       <span>Frakt: ${totalShipping} kr </span>
-      <span>Totalt: ${totalOrderSum}</span>
+      <span class="total-order-sum">Totalt: ${totalOrderSum} kr</span>
     </div>
   `;
 }

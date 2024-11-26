@@ -46,7 +46,6 @@ button {
 
 // ---------- CART -----------
 .cart {
-	background-color: $brown;
 	img {
 		max-height: 12vh;
 		width: auto;
@@ -62,8 +61,17 @@ button {
 	font-style: italic;
 }
 
-#cart-summary {
-    background-color: $yellow;
+.cart-total {
+	display: flex;
+	flex-direction: column;
+	span {
+		font-style: italic;
+		font-size: 1rem;
+	}
+	.total-order-sum {
+		font-style: normal;
+		font-size: 1.2rem;
+	}
 }
 
 
@@ -71,7 +79,12 @@ button {
 // ---------- FILTER ----------
 
 #filter-products {
-    background-color: $brown;
+
+	.flex {
+		max-width: 50%;
+		display: flex;
+		justify-content: space-around;
+	}
 }
 
 
