@@ -576,7 +576,7 @@ function switchPaymentMethod(e) {
 }
 
 function isPersonalIdNumberValid() {
-  return personalIdRegEx.exec(personalId.value);
+  return personalIdRegEx.exec(personalID.value);
 }
 
 /**
@@ -599,21 +599,22 @@ function activateOrderButton() {
 
     // Check card year
     let year = Number(creditCardYear.value);
-    let month = Number(creditCardMonth.value);
     const today = new Date();
     const shortYear = Number(String(today.getFullYear()).substring(2));
-    const shortMonth = Number(String(today.getMonth()).substring(2));
 
     if (year > shortYear + 2 || year < shortYear) {
       console.warn('Credit card year not valid.');
       return;
     }
 
-    if (month > shortMonth + 2 || month < shortMonth) {
+    // Check card month
+    let month = Number(creditCardMonth.value);
+    const shortMonth = Number(String(today.getMonth()).padStart(2, '0'));
+
+    if (month > 12 || (month <= shortMonth && year == shortYear)) {
       console.warn('Credit card month not valid.')
     }
 
-    // TODO: Fixa månad, obs. "padStart" med 0
     // Check card CVC
     if (creditCardCvc.value.length !== 3) {
       console.warn('CVC not valid.');
