@@ -210,7 +210,7 @@ function decreaseProductCount(e) {
   // Minska antal med -1
   products[foundProductIndex].amount -= 1;
 
-  printProductsList();
+  printProductsList(products);
   updateAndPrintCart();
 }
 
