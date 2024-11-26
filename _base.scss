@@ -1,3 +1,7 @@
+.hidden {
+	display: none;
+}
+
 .product {
 	border-bottom: 2px solid black;
 	margin-bottom: 20px;
@@ -42,4 +46,45 @@ form {
 
 #filter-products {
     background-color: $brown;
+}
+
+.payment-options {
+	background-color: rgb(210, 231, 231);
+	border-radius: 8px;
+	padding: 8px;
+	border: 1px solid #262626;
+  
+	button {
+	  padding: 8px 16px;
+	  font-size: 1.2rem;
+	  background-color: green;
+	  border: 0;
+	  border-radius: 8px;
+	  cursor: pointer;
+	  color: white;
+	  &:disabled {
+		background-color: #b5b5b5;
+		cursor: not-allowed;
+	  }
+	}
+  
+	.selector {
+		margin-block: 16px;
+		text-align: center;
+	}
+  
+	input.small {
+		width: 80px;
+	}
+  
+	.card, .invoice {
+	  label {
+		display: flex;
+		gap: 8px;
+		margin-block: 8px;
+		align-items: center;
+		justify-content: space-between;
+	  }
+	}
+  
 }

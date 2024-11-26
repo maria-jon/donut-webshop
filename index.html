@@ -91,15 +91,6 @@
                     Email: 
                     <input type="email" name="email">
                 </label>
-                <span>Betalsätt:</span>
-                <label> 
-                    Faktura
-                    <input type="radio" id="payInvoice" name="payment">
-                </label>
-                <label>
-                    Kort
-                    <input type="radio" id="payCard" name="payment">
-                </label>
                 <label>
                     Godkänn att vi behandlar dina personuppgifter
                     <input type="checkbox" name="data">
@@ -112,9 +103,44 @@
                     Rabattkod:
                     <input type="text" name="discount">
                 </label>
-                <div class="form-buttons">
+
+                <div class="payment-options">
+                    <div class="selector">
+                        <label>
+                            <input type="radio" name="payment-option" value="invoice">
+                            <span>Faktura</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="payment-option" value="card" checked>
+                            <span>Kort</span>
+                        </label>
+                    </div>
+                  
+                    <div class="invoice hidden" id="invoice">
+                        <label>
+                            <span>Personnummer</span>
+                            <input type="text" name="personal-id" id="personalID" value="19850505-1234">
+                        </label>
+                    </div>
+                    
+                    <div class="card" id="card">
+                        <label>
+                            <span>Kortnummer</span>
+                            <input type="number" id="creditCardNumber" value="5100080000000000">
+                        </label>
+                        <label>
+                            <span>Datum</span>
+                            <span>
+                                <input type="number" class="small" placeholder="YY" id="creditCardYear">/<input type="number" class="small" placeholder="MM" id="creditCardMonth">
+                            </span>
+                        </label>
+                        <label>
+                            <span>CVC</span>
+                            <input type="number" placeholder="123" id="creditCardCvc">
+                        </label>
+                    </div>
                     <input type="reset" value="Rensa info">
-                    <input type="submit" value="Beställ">
+                    <button id="orderBtn" disabled>Beställ</button>
                 </div>
             </form>
         </section>

@@ -462,9 +462,91 @@ for (let i = 0; i < categoryFilterRadios.length; i++) {
 // eventlyssnare för när man drar i slidern 
 priceRangeSlider.addEventListener('input', filterProducts);
 
-/*
-sweetRadio.addEventListener('click', updateCategoryFilter);
-sourRadio.addEventListener('click', updateCategoryFilter);
-veganRadio.addEventListener('click', updateCategoryFilter);
-allRadio.addEventListener('click', updateCategoryFilter);
-*/
+
+// ------------------------------------------------
+// ------------ PAYMENT -------------------
+// ------------------------------------------------
+
+const cardInvoiceRadios = Array.from(document.querySelectorAll('input[name="payment-option"]'));
+const inputs = [
+  document.querySelector('#creditCardNumber'),
+  document.querySelector('#creditCardYear'),
+  document.querySelector('#creditCardMonth'),
+  document.querySelector('#creditCardCvc'),
+  document.querySelector('#personalID')
+];
+
+const invoiceOption = document.querySelector('#invoice');
+const cardOption = document.querySelector('#card');
+const orderBtn = document.querySelector('#orderBtn');
+
+// Default options
+let selectedPaymentOption = 'card';
+
+// REGEX
+const personalIdRegEx = new RegExp(/^(\d{10}|\d{12}|\d{6}-\d{4}|\d{8}-\d{4}|\d{8} \d{4}|\d{6} \d{4})/);
+const creditCardNumberRegEx = new RegExp(/^(5[1-5][0-9]{14}|2(22[1-9][0-9]{12}|2[3-9][0-9]{13}|[3-6][0-9]{14}|7[0-1][0-9]{13}|720[0-9]{12}))$/); // MasterCard
+
+// Add event listeners
+inputs.forEach(input => {
+  input.addEventListener('focusout', activateOrderButton);
+  input.addEventListener('change', activateOrderButton);
+});
+
+cardInvoiceRadios.forEach(radioBtn => {
+  radioBtn.addEventListener('change', switchPaymentMethod);
+});
+
+/**
+ * Switches between invoice payment method and
+ * card payment method. Toggles their visibility.
+ */
+function switchPaymentMethod(e) {
+  invoiceOption.classList.toggle('hidden');
+  cardOption.classList.toggle('hidden');
+
+  selectedPaymentOption = e.target.value;
+}
+
+function isPersonalIdNumberValid() {
+  return personalIdRegEx.exec(personalId.value);
+}
+
+/**
+ * Activate order button if all fields are
+ * correctly filled.
+ */
+function activateOrderButton() {
+  orderBtn.setAttribute('disabled', '');
+
+  if (selectedPaymentOption === 'invoice' && !isPersonalIdNumberValid()) {
+    return;
+  }
+  
+  if (selectedPaymentOption === 'card') {
+    // Check card number
+    if (creditCardNumberRegEx.exec(creditCardNumber.value) === null) {
+      console.warn('Credit card number not valid.');
+      return;
+    }
+
+    // Check card year
+    let year = Number(creditCardYear.value);
+    const today = new Date();
+    const shortYear = Number(String(today.getFullYear()).substring(2));
+
+    if (year > shortYear + 2 || year < shortYear) {
+      console.warn('Credit card month not valid.');
+      return;
+    }
+
+    // TODO: Fixa månad, obs. "padStart" med 0
+    // Check card CVC
+    if (creditCardCvc.value.length !== 3) {
+      console.warn('CVC not valid.');
+      return;
+    }
+  }
+
+  orderBtn.removeAttribute('disabled');
+}
