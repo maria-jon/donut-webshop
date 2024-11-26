@@ -476,6 +476,59 @@ for (let i = 0; i < categoryFilterRadios.length; i++) {
 // eventlyssnare för när man drar i slidern 
 priceRangeSlider.addEventListener('input', filterProducts);
 
+// ------------------------------------------------
+// ------------ VALIDATE FORM -------------------
+// ------------------------------------------------
+function validateAdress() {
+  let adress = document.getElementById("adress").value;
+
+  if (adress.length === 0) {
+    adressError.innerHTML = "*";
+    return false;
+  }
+  adressError.innerHTML = '<i class="fa-solid fa-check"></i>';
+  return true;
+}
+
+function validateZip() {
+  let zipCode = document.getElementById("zip").value;
+
+  if (zipCode.length === 0) {
+    zipError.innerHTML = "*";
+    return false;
+  }
+  zipError.innerHTML = '<i class="fa-solid fa-check"></i>';
+  return true;
+}
+
+function validateCity() {
+  let city = document.getElementById("city").value;
+
+  if (city.length === 0) {
+    cityError.innerHTML = "*";
+    return false;
+  }
+  cityError.innerHTML = '<i class="fa-solid fa-check"></i>';
+  return true;
+}
+
+function validatePhone() {
+  let phone = document.getElementById("phone").value;
+
+  if (phone.length === 0) {
+    phoneError.innerHTML = "*";
+    return false;
+  }
+
+  if (!phone.match(/^[0-9]{10}$/)) {
+    phoneError.innerHTML = "Endast siffror";
+    return false;
+  }
+
+  phoneError.innerHTML = '<i class="fa-solid fa-check"></i>';
+  return true;
+}
+
 
 // ------------------------------------------------
 // ------------ PAYMENT -------------------
@@ -546,12 +599,18 @@ function activateOrderButton() {
 
     // Check card year
     let year = Number(creditCardYear.value);
+    let month = Number(creditCardMonth.value);
     const today = new Date();
     const shortYear = Number(String(today.getFullYear()).substring(2));
+    const shortMonth = Number(String(today.getMonth()).substring(2));
 
     if (year > shortYear + 2 || year < shortYear) {
-      console.warn('Credit card month not valid.');
+      console.warn('Credit card year not valid.');
       return;
+    }
+
+    if (month > shortMonth + 2 || month < shortMonth) {
+      console.warn('Credit card month not valid.')
     }
 
     // TODO: Fixa månad, obs. "padStart" med 0
