@@ -2,12 +2,28 @@
 	display: none;
 }
 
+body {
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	font-size: 1.2rem;
+}
+
+/*
+main {
+	max-width: 90%;
+}
+*/
+  
+input {
+	font-size: 1.2rem;
+	padding: 4px;
+}
+
 .product {
 	border-bottom: 2px solid black;
 	margin-bottom: 20px;
 }
 img {
-	max-width: 500px;
+	max-width: 400px;
 	height: auto;
 	display: block;
 }
@@ -17,12 +33,22 @@ form {
     flex-direction: column;
 }
 
+button {
+	padding: 8px 16px;
+	font-size: 1.2rem;
+	background-color: $pink;
+	border: 0;
+	border-radius: 8px;
+	cursor: pointer;
+	color: white;
+}
+
 
 // ---------- CART -----------
 .cart {
 	background-color: $brown;
 	img {
-		max-height: 16vh;
+		max-height: 12vh;
 		width: auto;
 	}
 }
@@ -48,8 +74,11 @@ form {
     background-color: $brown;
 }
 
+
+// ---------- PAYMENT ----------
+
 .payment-options {
-	background-color: rgb(210, 231, 231);
+	background-color: $cyan;
 	border-radius: 8px;
 	padding: 8px;
 	border: 1px solid #262626;
@@ -57,7 +86,7 @@ form {
 	button {
 	  padding: 8px 16px;
 	  font-size: 1.2rem;
-	  background-color: green;
+	  background-color: $pink;
 	  border: 0;
 	  border-radius: 8px;
 	  cursor: pointer;

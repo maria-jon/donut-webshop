@@ -187,7 +187,7 @@ function increaseProductCount(e) {
   // Öka antal med +1
   products[foundProductIndex].amount += 1;
 
-  printProductsList();
+  printProductsList(products);
 
   updateAndPrintCart();
 }
