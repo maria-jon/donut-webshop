@@ -387,6 +387,10 @@ function validatePhone() {
   phoneError.innerHTML = '<i class="fa-solid fa-check"></i>';
   return true;
 }
+validateInput('address'); // Skicka in vilket ID som ska kollas
+validateInput('zip');
+validateInput('city');
+validateInput('phone', 'phoneNumber'); // Id + specialfall
 
 
 // ------------------------------------------------
