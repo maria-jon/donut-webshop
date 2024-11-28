@@ -342,66 +342,6 @@ priceRangeSlider.addEventListener('input', filterProducts);
 // ------------------------------------------------
 // ------------ VALIDATE FORM -------------------
 // ------------------------------------------------
-/*
-function validateAddress() {
-  let address = document.getElementById("address").value;
-  const addressError = address.previousSibling;
-
-  if (address.length === 0) {
-    addressError.innerHTML = '*';
-    return false;
-  } else {
-    addressError.innerHTML = '<i class="fa fa-check"></i>';
-    return true;
-  }
-}
-
-function validateZip() {
-  let zipCode = document.getElementById("zip").value;
-
-  if (zipCode.length === 0) {
-    zipError.innerHTML = "*";
-    return false;
-  }
-  zipError.innerHTML = '<i class="fa fa-check"></i>';
-  return true;
-}
-
-function validateCity() {
-  let city = document.getElementById("city").value;
-
-  if (city.length === 0) {
-    cityError.innerHTML = "*";
-    return false;
-  }
-  cityError.innerHTML = '<i class="fa fa-check"></i>';
-  return true;
-}
-
-function validatePhone() {
-  let phone = document.getElementById("phone").value;
-
-  if (phone.length === 0) {
-    phoneError.innerHTML = "*";
-    return false;
-  }
-
-  if (!phone.match(/^[0-9]{10}$/)) {
-    phoneError.innerHTML = "Endast siffror";
-    return false;
-  }
-
-  phoneError.innerHTML = '<i class="fa fa-check"></i>';
-  return true;
-}
-
-validateAddress();
-validateCity();
-validatePhone();
-validateZip();
-*/
-
-
 
 function validateInput(inputElementId, checkSpecial = '') {
   // Generalisera _vilket_ input-id som hämtas från HTML-dokumentet
@@ -493,7 +433,7 @@ let selectedPaymentOption = 'card';
 const personalIdRegEx = new RegExp(/^(\d{10}|\d{12}|\d{6}-\d{4}|\d{8}-\d{4}|\d{8} \d{4}|\d{6} \d{4})/);
 const creditCardNumberRegEx = new RegExp(/^(5[1-5][0-9]{14}|2(22[1-9][0-9]{12}|2[3-9][0-9]{13}|[3-6][0-9]{14}|7[0-1][0-9]{13}|720[0-9]{12}))$/); // MasterCard
 
-// Add event listeners
+// Eventlyssnare 
 inputs.forEach(input => {
   input.addEventListener('focusout', activateOrderButton);
   input.addEventListener('change', activateOrderButton);
@@ -533,10 +473,14 @@ function activateOrderButton() {
   
 
   if (selectedPaymentOption === 'card') {
+    const feedbackCardNumber = creditCardNumber.closest('label').querySelector('.error-message');
     // Kolla kortnummer
     if (creditCardNumberRegEx.exec(creditCardNumber.value) === null) {
       console.warn('Credit card number not valid.');
-      return;
+      feedbackCardNumber.innerHTML = `<i>* Fyll i kortnummer.</i>`;
+      return false;
+    } else {
+      feedbackCardNumber.innerHTML = '<i class="fa fa-check"></i>';
     }
 
     // Kolla kortår
@@ -549,6 +493,7 @@ function activateOrderButton() {
     if (year > shortYear + 2 || year < shortYear) {
       console.warn('Credit card year not valid.');
       feedbackYear.innerHTML = `<i>* Fyll i år.</i>`;
+      return false;
     } else {
       feedbackYear.innerHTML = '<i class="fa fa-check"></i>';
     }
@@ -559,14 +504,13 @@ function activateOrderButton() {
     let month = Number(creditCardMonth.value);
     const shortMonth = Number(String(today.getMonth()).padStart(2, '0'));
     
-    if (month > 12 || (month <= shortMonth && year == shortYear) || month.length <= 1) {
+    if ((month > 12) || (month <= shortMonth && year == shortYear) || (month <= 0)) {
       console.warn('Credit card month not valid.');
       feedbackMonth.innerHTML = `<i>* Fyll i månad.</i>`;
+      return false;
     } else {
       feedbackMonth.innerHTML = '<i class="fa fa-check"></i>';
     }
-
-    
 
     const feedbackCvc = creditCardCvc.closest('label').querySelector('.error-message');
     // Kolla CVC
@@ -576,7 +520,6 @@ function activateOrderButton() {
       return false;
     } else {
       feedbackCvc.innerHTML = '<i class="fa fa-check"></i>';
-      return true;
     }
   }
 
