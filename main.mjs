@@ -531,35 +531,52 @@ function activateOrderButton() {
     return;
   }
   
+
   if (selectedPaymentOption === 'card') {
-    // Check card number
+    // Kolla kortnummer
     if (creditCardNumberRegEx.exec(creditCardNumber.value) === null) {
       console.warn('Credit card number not valid.');
       return;
     }
 
-    // Check card year
+    // Kolla kortår
     let year = Number(creditCardYear.value);
     const today = new Date();
     const shortYear = Number(String(today.getFullYear()).substring(2));
 
+    const feedbackYear = document.getElementById('errorYear');
+
     if (year > shortYear + 2 || year < shortYear) {
       console.warn('Credit card year not valid.');
-      return;
+      feedbackYear.innerHTML = `<i>* Fyll i år.</i>`;
+    } else {
+      feedbackYear.innerHTML = '<i class="fa fa-check"></i>';
     }
 
-    // Check card month
+    const feedbackMonth = document.getElementById('errorMonth');
+
+    // Kolla kortmånad
     let month = Number(creditCardMonth.value);
     const shortMonth = Number(String(today.getMonth()).padStart(2, '0'));
-
-    if (month > 12 || (month <= shortMonth && year == shortYear)) {
-      console.warn('Credit card month not valid.')
+    
+    if (month > 12 || (month <= shortMonth && year == shortYear) || month.length <= 1) {
+      console.warn('Credit card month not valid.');
+      feedbackMonth.innerHTML = `<i>* Fyll i månad.</i>`;
+    } else {
+      feedbackMonth.innerHTML = '<i class="fa fa-check"></i>';
     }
 
-    // Check card CVC
+    
+
+    const feedbackCvc = creditCardCvc.closest('label').querySelector('.error-message');
+    // Kolla CVC
     if (creditCardCvc.value.length !== 3) {
       console.warn('CVC not valid.');
-      return;
+      feedbackCvc.innerHTML = `<i>* Fältet är obligatoriskt</i>`;
+      return false;
+    } else {
+      feedbackCvc.innerHTML = '<i class="fa fa-check"></i>';
+      return true;
     }
   }
 
