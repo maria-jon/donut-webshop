@@ -342,15 +342,18 @@ priceRangeSlider.addEventListener('input', filterProducts);
 // ------------------------------------------------
 // ------------ VALIDATE FORM -------------------
 // ------------------------------------------------
-function validateAdress() {
-  let adress = document.getElementById("adress").value;
+/*
+function validateAddress() {
+  let address = document.getElementById("address").value;
+  const addressError = address.previousSibling;
 
-  if (adress.length === 0) {
-    adressError.innerHTML = "*";
+  if (address.length === 0) {
+    addressError.innerHTML = '*';
     return false;
+  } else {
+    addressError.innerHTML = '<i class="fa fa-check"></i>';
+    return true;
   }
-  adressError.innerHTML = '<i class="fa-solid fa-check"></i>';
-  return true;
 }
 
 function validateZip() {
@@ -360,7 +363,7 @@ function validateZip() {
     zipError.innerHTML = "*";
     return false;
   }
-  zipError.innerHTML = '<i class="fa-solid fa-check"></i>';
+  zipError.innerHTML = '<i class="fa fa-check"></i>';
   return true;
 }
 
@@ -371,7 +374,7 @@ function validateCity() {
     cityError.innerHTML = "*";
     return false;
   }
-  cityError.innerHTML = '<i class="fa-solid fa-check"></i>';
+  cityError.innerHTML = '<i class="fa fa-check"></i>';
   return true;
 }
 
@@ -388,21 +391,83 @@ function validatePhone() {
     return false;
   }
 
-  phoneError.innerHTML = '<i class="fa-solid fa-check"></i>';
+  phoneError.innerHTML = '<i class="fa fa-check"></i>';
   return true;
 }
 
-validateAdress();
+validateAddress();
 validateCity();
 validatePhone();
 validateZip();
-
-/*
-validateInput('address'); // Skicka in vilket ID som ska kollas
-validateInput('zip');
-validateInput('city');
-validateInput('phone', 'phoneNumber'); // Id + specialfall
 */
+
+
+
+function validateInput(inputElementId, checkSpecial) {
+  // Generalisera _vilket_ input-id som hämtas från HTML-dokumentet
+  const inputField = document.getElementById(inputElementId);
+
+  if (!inputField) {
+    console.error(`Element with id ${inputElementId} not found.`);
+    return false;
+  }
+  // hitta rätt element
+  const feedbackField = inputField.closest('label').querySelector('.error-message');
+  
+  if (!feedbackField) {
+    console.error(`No feedback field found for input id ${inputElementId}`);
+    return false;
+  }  
+
+  const inputValue = inputField.value.trim();
+
+  // Om vi har special-fall, som t.ex. telefonnummer
+  let hasSpecialError = false;
+  let customErrorMessage = '';
+  
+  // Om vi behöver kontrollera specialfall
+  if (checkSpecial !== '') {
+    
+    // Kolla vilket specialfall
+    switch(checkSpecial) {
+      case 'phoneNumber':
+        hasSpecialError = !/^[0-9]{10}$/.test(inputValue);
+        customErrorMessage = 'Endast siffror.';
+        break;
+      case 'socialSecurityNumber':
+        // Do something else
+        break;
+    }
+  }
+  
+  // Skriv ut ev. felmeddelande eller check-mark
+  if (inputValue.length === 0 || hasSpecialError) {
+    feedbackField.innerHTML = `<i>* ${customErrorMessage || 'Fältet är obligatoriskt'}</i>`;
+    return false;
+  } else {
+    feedbackField.innerHTML = '<i class="fa fa-check"></i>';
+    return true;
+  }
+}
+
+// checka valideringen när formen skickas
+document.querySelector('form').addEventListener('submit', function (event) {
+  event.preventDefault(); // Prevent form submission for testing
+  const isFirstNameValid = validateInput('first-name');
+  const isLastNameValid = validateInput('last-name');
+  const isAddressValid = validateInput('address');
+  const isZipValid = validateInput('zip');
+  const isCityValid = validateInput('city');
+  const isPhoneValid = validateInput('phone', 'phoneNumber');
+  const isEmailValid = validateInput('email');
+
+  if (isFirstNameValid && isLastNameValid && isAddressValid && isZipValid && isCityValid && isPhoneValid && isEmailValid) {
+    console.log('Form is valid!');
+  } else {
+    console.log('Form contains errors.');
+  }
+});
+
 
 // ------------------------------------------------
 // ------------ PAYMENT -------------------
@@ -442,6 +507,7 @@ cardInvoiceRadios.forEach(radioBtn => {
  * Switches between invoice payment method and
  * card payment method. Toggles their visibility.
  */
+
 function switchPaymentMethod(e) {
   invoiceOption.classList.toggle('hidden');
   cardOption.classList.toggle('hidden');
@@ -457,6 +523,7 @@ function isPersonalIdNumberValid() {
  * Activate order button if all fields are
  * correctly filled.
  */
+
 function activateOrderButton() {
   orderBtn.setAttribute('disabled', '');
 
@@ -498,3 +565,4 @@ function activateOrderButton() {
 
   orderBtn.removeAttribute('disabled');
 }
+*/

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="sv">
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css">
@@ -66,22 +66,19 @@
             <form>
                 <span>Obligatoriska uppgifter är markerade med *.</span>
                 <label>
-                    <span>Förnamn:</span> 
+                    <span>Förnamn</span> 
                     <div class="error-message"></div> <!-- previousSibling till id="address" -->
-                    <input type="text" name="first-name" id="last-name">
-                    <div class="just-an-example"></div> <!-- nextSibling till id="address" -->
+                    <input type="text" name="first-name" id="first-name">
                 </label>
                 <label>
                     <span>Efternamn:</span> 
                     <div class="error-message"></div> 
                     <input type="text" name="last-name" id="last-name">
-                    <div class="just-an-example"></div>
                 </label>
                 <label>
                     <span>Adress:</span> 
                     <div class="error-message"></div> 
                     <input type="text" name="address" id="address">
-                    <div class="just-an-example"></div>
                 </label>
                 <label>Ev. portkod:
                     <input type="text" name="code">
@@ -90,25 +87,21 @@
                     <span>Postnummer:</span> 
                     <div class="error-message"></div> 
                     <input type="number" name="postcode" id="zip">
-                    <div class="just-an-example"></div>
                 </label>
                 <label>
                     <span>Postort:</span> 
                     <div class="error-message"></div> 
                     <input type="text" name="city" id="city">
-                    <div class="just-an-example"></div>
                 </label>
                 <label>
                     <span>Telefon:</span> 
                     <div class="error-message"></div> 
                     <input type="tel" name="phone" id="phone">
-                    <div class="just-an-example"></div>
                 </label>
                 <label>
                     <span>Email:</span> 
                     <div class="error-message"></div> 
                     <input type="email" name="email" id="email">
-                    <div class="just-an-example"></div>
                 </label>
                 <label>
                     <span>Godkänn att vi behandlar dina personuppgifter</span>
@@ -140,7 +133,6 @@
                             <span>Personnummer</span>
                             <div class="error-message"></div> 
                             <input type="text" name="personal-id" id="personalID" value="19850505-1234">
-                            <div class="just-an-example"></div>
                         </label>
                     </div>
                     
@@ -149,21 +141,18 @@
                             <span>Kortnummer</span>
                             <div class="error-message"></div> 
                             <input type="number" id="creditCardNumber" value="5100080000000000">
-                            <div class="just-an-example"></div>
                         </label>
                         <label>
                             <span>Datum</span>
                             <span>
                                 <div class="error-message"></div> 
                                 <input type="number" class="small" placeholder="YY" id="creditCardYear">/<input type="number" class="small" placeholder="MM" id="creditCardMonth">
-                                <div class="just-an-example"></div>
                             </span>
                         </label>
                         <label>
                             <span>CVC</span>
                             <div class="error-message"></div> 
                             <input type="number" placeholder="123" id="creditCardCvc">
-                            <div class="just-an-example"></div>
                         </label>
                     </div>
                     <button type="reset" value="Rensa info">Rensa info</button>
