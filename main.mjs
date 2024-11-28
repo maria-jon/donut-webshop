@@ -20,7 +20,6 @@ const allRadio = document.querySelector('#all-radio')
 let filteredProducts = [...products];
 let filteredProductsInPriceRange = [];
 */
-const today = new Date();
 
 // ------------------------------------------------
 // ------------ SHOW PRODUCTS IN CART -------------
@@ -150,7 +149,10 @@ function updateAndPrintCart() {
     x om det inte är det > return
     - annars > 10 % rabatt på beställningssumman (visa i sammanfattningen)
     */
-   
+
+
+    const today = new Date(); 
+
     if (today.getDay() != 1) { // om det inte är måndag
       return
     } else if (today.getHours() >= 10) { // om klockan är mer än 10
@@ -185,6 +187,8 @@ function updateAndPrintCart() {
       - annars > 15% extra pris på produkterna
     */
 
+    const today = new Date(); 
+    
     if (today.getDay() == 2 || today.getDay() == 3 || today.getDay() == 4) { // om det inte är helg
       return
     } else if (today.getDay() == 5 && today.getHours() <= 15) { // om det är fredag innan kl 15
@@ -387,11 +391,18 @@ function validatePhone() {
   phoneError.innerHTML = '<i class="fa-solid fa-check"></i>';
   return true;
 }
+
+validateAdress();
+validateCity();
+validatePhone();
+validateZip();
+
+/*
 validateInput('address'); // Skicka in vilket ID som ska kollas
 validateInput('zip');
 validateInput('city');
 validateInput('phone', 'phoneNumber'); // Id + specialfall
-
+*/
 
 // ------------------------------------------------
 // ------------ PAYMENT -------------------
