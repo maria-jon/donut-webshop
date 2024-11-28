@@ -403,7 +403,7 @@ validateZip();
 
 
 
-function validateInput(inputElementId, checkSpecial) {
+function validateInput(inputElementId, checkSpecial = '') {
   // Generalisera _vilket_ input-id som hämtas från HTML-dokumentet
   const inputField = document.getElementById(inputElementId);
 
@@ -450,24 +450,24 @@ function validateInput(inputElementId, checkSpecial) {
   }
 }
 
-// checka valideringen när formen skickas
-document.querySelector('form').addEventListener('submit', function (event) {
-  event.preventDefault(); // Prevent form submission for testing
-  const isFirstNameValid = validateInput('first-name');
-  const isLastNameValid = validateInput('last-name');
-  const isAddressValid = validateInput('address');
-  const isZipValid = validateInput('zip');
-  const isCityValid = validateInput('city');
-  const isPhoneValid = validateInput('phone', 'phoneNumber');
-  const isEmailValid = validateInput('email');
-
-  if (isFirstNameValid && isLastNameValid && isAddressValid && isZipValid && isCityValid && isPhoneValid && isEmailValid) {
-    console.log('Form is valid!');
+// Eventlyssnare för input
+function attachRealTimeValidation(inputElementId, checkSpecial = '') {
+  const inputField = document.getElementById(inputElementId);
+  if (inputField) {
+    inputField.addEventListener('input', () => validateInput(inputElementId, checkSpecial));
+    inputField.addEventListener('blur', () => validateInput(inputElementId, checkSpecial));
   } else {
-    console.log('Form contains errors.');
+    console.error(`attachRealTimeValidation: Element-ID ${inputElementId} hittas inte.`);
   }
-});
+}
 
+attachRealTimeValidation('first-name');
+attachRealTimeValidation('last-name');
+attachRealTimeValidation('address');
+attachRealTimeValidation('zip');
+attachRealTimeValidation('city');
+attachRealTimeValidation('phone', 'phoneNumber');
+attachRealTimeValidation('email');
 
 // ------------------------------------------------
 // ------------ PAYMENT -------------------
@@ -565,4 +565,3 @@ function activateOrderButton() {
 
   orderBtn.removeAttribute('disabled');
 }
-*/
