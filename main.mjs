@@ -466,19 +466,19 @@ function isPersonalIdNumberValid() {
 
 function activateOrderButton() {
   orderBtn.setAttribute('disabled', '');
+  let isValid = true;
 
   if (selectedPaymentOption === 'invoice' && !isPersonalIdNumberValid()) {
     return;
   }
   
-
   if (selectedPaymentOption === 'card') {
     const feedbackCardNumber = creditCardNumber.closest('label').querySelector('.error-message');
     // Kolla kortnummer
     if (creditCardNumberRegEx.exec(creditCardNumber.value) === null) {
       console.warn('Credit card number not valid.');
       feedbackCardNumber.innerHTML = `<i>* Fyll i kortnummer.</i>`;
-      return false;
+      isValid = false
     } else {
       feedbackCardNumber.innerHTML = '<i class="fa fa-check"></i>';
     }
@@ -493,7 +493,7 @@ function activateOrderButton() {
     if (year > shortYear + 2 || year < shortYear) {
       console.warn('Credit card year not valid.');
       feedbackYear.innerHTML = `<i>* Fyll i år.</i>`;
-      return false;
+      isValid = false
     } else {
       feedbackYear.innerHTML = '<i class="fa fa-check"></i>';
     }
@@ -507,7 +507,7 @@ function activateOrderButton() {
     if ((month > 12) || (month <= shortMonth && year == shortYear) || (month <= 0)) {
       console.warn('Credit card month not valid.');
       feedbackMonth.innerHTML = `<i>* Fyll i månad.</i>`;
-      return false;
+      isValid = false
     } else {
       feedbackMonth.innerHTML = '<i class="fa fa-check"></i>';
     }
@@ -517,11 +517,13 @@ function activateOrderButton() {
     if (creditCardCvc.value.length !== 3) {
       console.warn('CVC not valid.');
       feedbackCvc.innerHTML = `<i>* Fältet är obligatoriskt</i>`;
-      return false;
+      isValid = false
     } else {
       feedbackCvc.innerHTML = '<i class="fa fa-check"></i>';
     }
   }
 
-  orderBtn.removeAttribute('disabled');
+  if (isValid) {
+    orderBtn.removeAttribute('disabled');
+  }
 }
