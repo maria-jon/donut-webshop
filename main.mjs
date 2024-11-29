@@ -133,7 +133,7 @@ function updateAndPrintCart() {
     - annars > 10 % rabatt på beställningssumman (visa i sammanfattningen)
     */
 
-    const today = new Date('2024-12-02'); 
+    const today = new Date(); 
     const isMonday = today.getDay() === 1;
     const isBetween3and10 = today.getHours() >= 3 && today.getHours() < 10;
 
@@ -163,31 +163,6 @@ function updateAndPrintCart() {
   }
   bulkDiscount(purchasedProducts);
 
-
-  function weekendRaise() {
-    /* helghöjning
-      x är det fredag, lördag, söndag, eller måndag?
-      x om det är fredag innan 15:00 > return
-      x om det är måndag efter 03:00 > return
-      - annars > 15% extra pris på produkterna
-    */
-
-    const today = new Date(); 
-    
-    if (today.getDay() == 2 || today.getDay() == 3 || today.getDay() == 4) { // om det inte är helg
-      return
-    } else if (today.getDay() == 5 && today.getHours() <= 15) { // om det är fredag innan kl 15
-      return
-    } else if (today.getDay() == 1 && today.getHours() >= 3) { // om det är måndag efter kl 03
-      return
-    } else {
-      console.log('Hemlig prishöjning:', totalOrderSum * 0.15, 'kr. Totalsumman blir:', totalOrderSum * 1.15, 'kr.');
-    }
-  }
-  weekendRaise();
-
-
-
   // Kontrollera vilka produkter vi har i consolen
   console.log('purchased', purchasedProducts);
 
@@ -203,7 +178,6 @@ function updateAndPrintCart() {
         <div class="cart-info">
           <span class="product-description">${product.description}</span>
           <span>${product.amount} st</span>
-          <span> - </span> 
           <span class="product-price">${product.totalPrice} kr</span>
           <span class="material-icons" id="deleteItem">
             delete
@@ -223,6 +197,34 @@ function updateAndPrintCart() {
   `;
 }
 
+// ------------------------------------------------
+// ------------ SNEAKY HELG-ÖKNING ------------
+// ------------------------------------------------
+
+function weekendRaise(products) {
+  /* helghöjning
+    x är det fredag, lördag, söndag, eller måndag?
+    x om det är fredag innan 15:00 > return
+    x om det är måndag efter 03:00 > return
+    - annars > 15% extra pris på produkterna
+  */
+
+  const today = new Date(); 
+  
+  if (today.getDay() == 2 || today.getDay() == 3 || today.getDay() == 4) { // om det inte är helg
+    return
+  } else if (today.getDay() == 5 && today.getHours() <= 15) { // om det är fredag innan kl 15
+    return
+  } else if (today.getDay() == 1 && today.getHours() >= 3) { // om det är måndag efter kl 03
+    return
+  } else {products.forEach(product => {
+      const raise = product.price * 0.15;
+      console.log(`Helghöjning ${product.name}: +${raise} kr`);
+      product.price += raise;
+    });
+  }
+}
+weekendRaise(products);
 
 // ------------------------------------------------
 // ------------ SKRIVER UT PRODUKTER I HTML ------------
@@ -338,6 +340,7 @@ priceRangeSlider.addEventListener('input', filterProducts);
 // ------------ VALIDERA FORMULÄR -------------------
 // ------------------------------------------------
 
+
 function validateInput(inputElementId, checkSpecial = '') {
   // Generalisera _vilket_ input-id som hämtas från HTML-dokumentet
   const inputField = document.getElementById(inputElementId);
@@ -403,6 +406,7 @@ attachRealTimeValidation('zip');
 attachRealTimeValidation('city');
 attachRealTimeValidation('phone', 'phoneNumber');
 attachRealTimeValidation('email');
+
 
 // ------------------------------------------------
 // ------------ BETALNING -------------------
