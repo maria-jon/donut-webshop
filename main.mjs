@@ -42,7 +42,6 @@ function increaseProductCount(e) {
   products[foundProductIndex].amount += 1;
 
   printProductsList(products);
-
   updateAndPrintCart();
 }
 
@@ -91,7 +90,6 @@ function updateAndPrintCart() {
     }
   }
 
-
   // Räkna ut total summa
   let shippingCost = 0;
   const totalSum = purchasedProducts.reduce((total, product) => {
@@ -110,25 +108,9 @@ function updateAndPrintCart() {
   }, 0);
   console.log(`Antal i cart: ${shippingAmount}`);
 
-  // Räkna ut procent-kostnad på frakten
-  const shippingPrice = (totalSum) => {
-    return totalSum * 0.10;
-  };
-
-  // Räkna ut total frakt
-  const calculateTotalShipping = (totalSum) => {
-    return shippingPrice(totalSum) + 25;
-  };
-
-  // Sätter frakt
-  let totalShipping;
-  if (shippingAmount < 15) {
-    totalShipping = calculateTotalShipping(totalSum);
-    // console.log(`shippingPrice: ${shippingPrice(totalSum)} kr`);
-    // console.log(`Total frakt: ${totalShipping} kr`);
-  } else {
-    totalShipping = 0; // mer än 15st = gratis
-  }
+  // Räkna ut fraktkostnaden om mindre än 15 produkter
+  const calculateTotalShipping = (totalSum) => totalSum * 0.10 + 25;
+  let totalShipping = shippingAmount < 15 ? calculateTotalShipping(totalSum) : 0;
 
   // Räkna ut totalsumman
   const totalOrderSum = totalSum + totalShipping;
@@ -145,7 +127,6 @@ function updateAndPrintCart() {
     x om det inte är det > return
     - annars > 10 % rabatt på beställningssumman (visa i sammanfattningen)
     */
-
 
     const today = new Date(); 
 
