@@ -1,7 +1,7 @@
 import products from "./products.mjs";
 
 // ------------------------------------------------
-// ------------ HTML ELEMENTS ---------------------
+// ------------ HTML ELEMENT ---------------------
 // ------------------------------------------------
 
 const productsListDiv = document.querySelector('#products-list');
@@ -12,10 +12,6 @@ const categoryFilterRadios = document.querySelectorAll('[name="categoryFilter"]'
 const priceRangeSlider = document.querySelector('#priceRange');
 const currentRangeValue = document.querySelector('#currentRangeValue'); // priset som skrivs ut vid slidern
 
-const sweetRadio = document.querySelector('#sweet-radio')
-const sourRadio = document.querySelector('#sour-radio')
-const veganRadio = document.querySelector('#vegan-radio')
-const allRadio = document.querySelector('#all-radio')
 /*
 let filteredProducts = [...products];
 let filteredProductsInPriceRange = [];
@@ -139,7 +135,7 @@ function updateAndPrintCart() {
 
 
   // ------------------------------------------------
-  // ------------ DISCOUNTS -------------
+  // ------------ RABATTER -------------
   // ------------------------------------------------
   function mondayDiscount() {
     /* Måndagsrabatt
@@ -229,7 +225,7 @@ function updateAndPrintCart() {
 
 
 // ------------------------------------------------
-// ------------ PRINT PRODUCTS IN HTML ------------
+// ------------ SKRIVER UT PRODUKTER I HTML ------------
 // ------------------------------------------------
 
 // Skriva ut rating
@@ -306,10 +302,8 @@ function printProductsList(productList) {
 // Skriver ut produkter
 printProductsList(products);
 
-
-
 // ------------------------------------------------
-// ------------ FILTER PRODUCTS -------------------
+// ------------ FILTRERA PRODUKTER -------------------
 // ------------------------------------------------
 
 function filterProducts() {
@@ -340,7 +334,7 @@ for (let i = 0; i < categoryFilterRadios.length; i++) {
 priceRangeSlider.addEventListener('input', filterProducts);
 
 // ------------------------------------------------
-// ------------ VALIDATE FORM -------------------
+// ------------ VALIDERA FORMULÄR -------------------
 // ------------------------------------------------
 
 function validateInput(inputElementId, checkSpecial = '') {
@@ -375,7 +369,7 @@ function validateInput(inputElementId, checkSpecial = '') {
         customErrorMessage = 'Endast siffror.';
         break;
       case 'socialSecurityNumber':
-        // Do something else
+        // Något annat
         break;
     }
   }
@@ -410,7 +404,7 @@ attachRealTimeValidation('phone', 'phoneNumber');
 attachRealTimeValidation('email');
 
 // ------------------------------------------------
-// ------------ PAYMENT -------------------
+// ------------ BETALNING -------------------
 // ------------------------------------------------
 
 const cardInvoiceRadios = Array.from(document.querySelectorAll('input[name="payment-option"]'));
@@ -426,7 +420,7 @@ const invoiceOption = document.querySelector('#invoice');
 const cardOption = document.querySelector('#card');
 const orderBtn = document.querySelector('#orderBtn');
 
-// Default options
+// Default-alternativ
 let selectedPaymentOption = 'card';
 
 // REGEX
@@ -444,8 +438,8 @@ cardInvoiceRadios.forEach(radioBtn => {
 });
 
 /**
- * Switches between invoice payment method and
- * card payment method. Toggles their visibility.
+ * Byter betalningsmetod mellan faktura och kort 
+ * Togglar ifall de visas eller ej
  */
 
 function switchPaymentMethod(e) {
@@ -459,9 +453,9 @@ function isPersonalIdNumberValid() {
   return personalIdRegEx.exec(personalID.value);
 }
 
-/**
- * Activate order button if all fields are
- * correctly filled.
+/** 
+ * Aktiverar beställ-knappen om alla fält 
+ * korrekt ifyllda.
  */
 
 function activateOrderButton() {
