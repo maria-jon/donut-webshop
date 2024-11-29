@@ -7,6 +7,7 @@ const products = [
       rating: 4,
       amount: 0,
       category: 'sweet',
+      description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.', 
       img: {
         url: "./images/annie-spratt-jstQCOhzyQA-unsplash.jpg",
         width: 1000,
@@ -22,6 +23,7 @@ const products = [
       rating: 3,
       amount: 0,
       category: 'sweet',
+      description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
       img: {
         url: "./images/elena-koycheva-PFzy4N0_R3M-unsplash.jpg",
         width: 500,
@@ -37,6 +39,7 @@ const products = [
       rating: 1.5,
       amount: 0,
       category: 'sweet',
+      description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
       img: {
         url: "./images/annie-spratt-jstQCOhzyQA-unsplash.jpg",
         width: 1000,
@@ -52,6 +55,7 @@ const products = [
       rating: 4.5,
       amount: 0,
       category: 'sour',
+      description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
       img: {
         url: "./images/annie-spratt-jstQCOhzyQA-unsplash.jpg",
         width: 1000,
@@ -67,6 +71,7 @@ const products = [
       rating: 2.5,
       amount: 0,
       category: 'sweet',
+      description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
       img: {
         url: "./images/annie-spratt-jstQCOhzyQA-unsplash.jpg",
         width: 1000,
@@ -82,6 +87,7 @@ const products = [
       rating: 3,
       amount: 0,
       category: 'vegan',
+      description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
       img: {
         url: "./images/annie-spratt-jstQCOhzyQA-unsplash.jpg",
         width: 1000,
@@ -97,6 +103,7 @@ const products = [
       rating: 3.5,
       amount: 0,
       category: 'sweet',
+      description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
       img: {
         url: "./images/annie-spratt-jstQCOhzyQA-unsplash.jpg",
         width: 1000,
@@ -112,6 +119,7 @@ const products = [
       rating: 4,
       amount: 0,
       category: 'vegan',
+      description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
       img: {
         url: "./images/annie-spratt-jstQCOhzyQA-unsplash.jpg",
         width: 1000,
@@ -127,6 +135,7 @@ const products = [
       rating: 2,
       amount: 0,
       category: 'vegan',
+      description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
       img: {
         url: "./images/annie-spratt-jstQCOhzyQA-unsplash.jpg",
         width: 1000,
@@ -142,6 +151,7 @@ const products = [
       rating: 4.5,
       amount: 0,
       category: 'sour',
+      description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
       img: {
         url: "./images/annie-spratt-jstQCOhzyQA-unsplash.jpg",
         width: 1000,

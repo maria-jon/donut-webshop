@@ -196,8 +196,19 @@ function updateAndPrintCart() {
   purchasedProducts.forEach(product => {
     cart.innerHTML += `
       <div class="cart-item">
-        <img src="${product.img.url}" alt="${product.img.alt}">
-        <span class="cart-name">${product.name}: </span> ${product.amount} st - ${product.totalPrice} kr
+        <div class="cart-name">
+          <img src="${product.img.url}" alt="${product.img.alt}">
+          <h3 class>${product.name}</h3> 
+        </div>
+        <div class="cart-info">
+          <span class="product-description">${product.description}</span>
+          <span>${product.amount} st</span>
+          <span> - </span> 
+          <span class="product-price">${product.totalPrice} kr</span>
+          <span class="material-icons" id="deleteItem">
+            delete
+          </span>
+        </div>
       </div>
     `;
   });
@@ -264,8 +275,9 @@ function printProductsList(productList) {
       <article class="product">
         <h3>${product.name}</h3>
         <img src="${product.img.url}" alt="${product.img.alt}">
-        <span>${product.price} kr</span>
-        <p>Omdöme: ${getRatingHtml(product.rating)}</p>
+        <p class="product-description">${product.description}</p>
+        <p>${getRatingHtml(product.rating)}</p>
+        <span class="product-price">${product.price} kr</span> 
         <div>
           <button class="decrease" id="decrease-${product.id}">-</button>
           <input type="number" min="0" value="${product.amount}" id="input-${product.id}">
