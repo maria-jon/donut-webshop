@@ -78,21 +78,20 @@ function updateAndPrintCart() {
   x om det inte finns några produkter så ska det skrivas ut att varukorgen är tom
   */
 
-  // Alternativ 1: använda filter-funktionen i arrayer
-  // const purchasedProducts = products.filter((product) => product.amount > 0);
-
-  // Alternativ 2: for-loop
+  // Räkna ut antalet produkter i varukorgen
   const purchasedProducts = [];
   for (let i = 0; i < products.length; i++) {
     const product = products[i];
     if (product.amount > 0) {
       purchasedProducts.push(product);
+      // räkna ut totalsumman för produkten
+      product.totalPrice = product.amount * product.price;
     }
   }
 
-  // Räkna ut total summa
+  // Räkna ut total summa för köpet
   let shippingCost = 0;
-  const totalSum = purchasedProducts.reduce((total, product) => {
+  let totalSum = purchasedProducts.reduce((total, product) => {
     return total + product.amount * product.price;
   }, shippingCost);
 
@@ -113,7 +112,7 @@ function updateAndPrintCart() {
   let totalShipping = shippingAmount < 15 ? calculateTotalShipping(totalSum) : 0;
 
   // Räkna ut totalsumman
-  const totalOrderSum = totalSum + totalShipping;
+  let totalOrderSum = totalSum + totalShipping;
 
 
   // ------------------------------------------------
@@ -140,20 +139,23 @@ function updateAndPrintCart() {
   }
   mondayDiscount();
 
-  
   function bulkDiscount() {
     /* mängdrabatt (filter/find)
      x kolla antalet munkar för varje produkt
-     - om värdet är mindre än 10 > return
-     - om värdet 'antal munkar' för ett visst namn/produkt är mer än tio > 10% rabatt på summan av den munken
+     x om värdet är mindre än 10 > return
+     x om värdet 'antal munkar' för ett visst namn/produkt är mer än tio > 10% rabatt på summan av den munken
     */
-
-    const purchasedProductsBulk = products.filter((product) => product.amount > 9);
-
-    console.log('bulk', purchasedProductsBulk);
-
+   purchasedProducts.forEach(product => {
+    if (product.amount > 9) {
+      const discount = product.totalPrice * 0.10;
+      console.log(`Mängdrabatt för ${product.name}: - ${discount} kr`);
+      product.totalPrice -= discount;
+      totalOrderSum -= discount;
+      totalSum -= discount;
+    }
+   });
   }
-  bulkDiscount();
+  bulkDiscount(purchasedProducts);
 
 
   function weekendRaise() {
@@ -189,7 +191,7 @@ function updateAndPrintCart() {
     cart.innerHTML += `
       <div class="cart-item">
         <img src="${product.img.url}" alt="${product.img.alt}">
-        <span class="cart-name">${product.name}: </span> ${product.amount} st - ${product.amount * product.price} kr
+        <span class="cart-name">${product.name}: </span> ${product.amount} st - ${product.totalPrice} kr
       </div>
     `;
   });
