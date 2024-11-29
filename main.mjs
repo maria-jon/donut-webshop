@@ -340,21 +340,23 @@ priceRangeSlider.addEventListener('input', filterProducts);
 // ------------ VALIDERA FORMULÄR -------------------
 // ------------------------------------------------
 
+let validForm = false;
 
 function validateInput(inputElementId, checkSpecial = '') {
   // Generalisera _vilket_ input-id som hämtas från HTML-dokumentet
   const inputField = document.getElementById(inputElementId);
+  let isValid = true;
 
   if (!inputField) {
     console.error(`Element with id ${inputElementId} not found.`);
-    return false;
+    isValid = false;
   }
   // hitta rätt element
   const feedbackField = inputField.closest('label').querySelector('.error-message');
   
   if (!feedbackField) {
     console.error(`No feedback field found for input id ${inputElementId}`);
-    return false;
+    isValid = false;
   }  
 
   const inputValue = inputField.value.trim();
@@ -381,10 +383,14 @@ function validateInput(inputElementId, checkSpecial = '') {
   // Skriv ut ev. felmeddelande eller check-mark
   if (inputValue.length === 0 || hasSpecialError) {
     feedbackField.innerHTML = `<i>* ${customErrorMessage || 'Fältet är obligatoriskt'}</i>`;
-    return false;
+    isValid = false;
   } else {
     feedbackField.innerHTML = '<i class="fa fa-check"></i>';
-    return true;
+    isValid = true;
+  }
+
+  if (isValid = true) {
+    validForm = true;
   }
 }
 
@@ -406,7 +412,6 @@ attachRealTimeValidation('zip');
 attachRealTimeValidation('city');
 attachRealTimeValidation('phone', 'phoneNumber');
 attachRealTimeValidation('email');
-
 
 // ------------------------------------------------
 // ------------ BETALNING -------------------
@@ -522,7 +527,14 @@ function activateOrderButton() {
     }
   }
 
-  if (isValid) {
+  if (isValid && validForm) {
     orderBtn.removeAttribute('disabled');
   }
+}
+
+// Eventlyssnare för beställ-knapp
+orderBtn.addEventListener('click', order);
+
+function order (purchasedProducts) {
+
 }
