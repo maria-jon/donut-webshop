@@ -22,6 +22,7 @@ let filteredProductsInPriceRange = [];
 // ------------------------------------------------
 
 const cart = document.querySelector('#cart-summary');
+const cartMessage = document.querySelector('#cart-message');
 
 // ------------ ÖKA ANTAL -------------
 function increaseProductCount(e) {
@@ -111,6 +112,10 @@ function updateAndPrintCart() {
   const calculateTotalShipping = (totalSum) => totalSum * 0.10 + 25;
   let totalShipping = shippingAmount < 15 ? calculateTotalShipping(totalSum) : 0;
 
+  if (totalShipping === 0) {
+    cartMessage.innerHTML = '';
+    cartMessage.innerHTML += `<i>Gratis frakt!</i>`;
+  }
   // Räkna ut totalsumman
   let totalOrderSum = totalSum + totalShipping;
 
@@ -118,6 +123,7 @@ function updateAndPrintCart() {
   // ------------------------------------------------
   // ------------ RABATTER -------------
   // ------------------------------------------------
+
   function mondayDiscount() {
     /* Måndagsrabatt
     x är det måndag?
@@ -127,14 +133,14 @@ function updateAndPrintCart() {
     - annars > 10 % rabatt på beställningssumman (visa i sammanfattningen)
     */
 
-    const today = new Date(); 
+    const today = new Date('2024-12-02'); 
+    const isMonday = today.getDay() === 1;
+    const isBetween3and10 = today.getHours() >= 3 && today.getHours() < 10;
 
-    if (today.getDay() != 1) { // om det inte är måndag
-      return
-    } else if (today.getHours() >= 10) { // om klockan är mer än 10
-      return
-    } else if (today.getHours() >= 3)  { // om klockan är mer än 03
-      console.log('Det är måndag morgon, så du får 10 % rabatt på din beställning:', totalOrderSum * 0.1, 'kr. Totalsumman blir:', totalOrderSum * 0.9, 'kr.');
+    if (isMonday && isBetween3and10) {
+      const discount = totalOrderSum * 0.10;
+      totalOrderSum -= discount;
+      cartMessage.innerHTML += `<i>Måndagsrabatt: 10 % på hela beställningen!</i>`;
     }
   }
   mondayDiscount();
@@ -198,7 +204,7 @@ function updateAndPrintCart() {
 
   // Skriva ut totalsumma och frakt i cart
   cart.innerHTML +=`
-    <div class="cart-total">
+    <div class="cart-total"></div>
       <span>Pris: ${totalSum} kr </span>
       <span>Frakt: ${totalShipping} kr </span>
       <span class="total-order-sum">Totalt: ${totalOrderSum} kr</span>
