@@ -13,6 +13,17 @@ main {
 }
 */
   
+
+.header-top {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	margin: 0.5rem;
+	button {
+		padding: 0.5rem 2rem;
+	}
+}
+
 input {
 	font-size: 1.2rem;
 	padding: 4px;
@@ -46,17 +57,17 @@ form {
 }
 
 button {
-	padding: 8px 16px;
+	padding: 0.5rem 1rem;
 	font-size: 1.2rem;
 	background-color: $pink;
 	border: 0;
-	border-radius: 8px;
+	border-radius: 0.5rem;
 	cursor: pointer;
 	color: white;
 }
 
 
-// ---------- CART -----------
+// ---------- VARUKORG -----------
 .cart {
 	img {
 		max-height: 12vh;
@@ -103,9 +114,14 @@ button {
 	}
 }
 
+// ---------- PRODUKTER ----------
 
+#products-list {
+	display: flex;
+	flex-direction: column;
+}
 
-// ---------- FILTER ----------
+// ---------- FILTRERING ----------
 
 #filter-products {
 
@@ -116,13 +132,13 @@ button {
 	}
 }
 
-// ---------- FORM ----------
+// ---------- FORMULÄR ----------
 
 i {
 	color: $teal;
 }
 
-// ---------- PAYMENT ----------
+// ---------- BETALNING ----------
 
 .payment-options {
 	background-color: $cyan;
