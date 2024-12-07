@@ -10,7 +10,6 @@ const categoryFilterRadios = document.querySelectorAll('[name="categoryFilter"]'
 const priceRangeSlider = document.querySelector('#priceRange');
 const currentRangeValue = document.querySelector('#currentRangeValue'); // priset som skrivs ut vid slidern
 
-// let cartMessage = document.getElementById('#cart-message');
 
 /*
 let filteredProducts = [...products];
@@ -67,7 +66,6 @@ function decreaseProductCount(e) {
 
 // ------------ SKRIVA UT PRODUKTER I KORGEN -------------
 
-const cartMessage = document.getElementById('#cart-message');
 
 function updateAndPrintCart(outputContainerId, options = {}) {
   const {
@@ -132,10 +130,6 @@ function updateAndPrintCart(outputContainerId, options = {}) {
 
 
   if (totalShipping === 0) {
-    /*
-    cartMessage.innerHTML = '';
-    cartMessage.innerHTML += `<i>Gratis frakt!</i><br>`;
-    */
    shippingMessage += `<i>Gratis frakt!</i>`;
   }
 
@@ -146,6 +140,8 @@ function updateAndPrintCart(outputContainerId, options = {}) {
   // ------------------------------------------------
   // ------------ RABATTER -------------
   // ------------------------------------------------
+
+  let mondayMessage = '';
 
   function mondayDiscount() {
     /* Måndagsrabatt
@@ -163,10 +159,12 @@ function updateAndPrintCart(outputContainerId, options = {}) {
     if (isMonday && isBetween3and10) {
       const discount = totalOrderSum * 0.10;
       totalOrderSum -= discount;
-      cartMessage.innerHTML += `<i>Måndagsrabatt: 10 % på hela beställningen!</i>`;
+      mondayMessage += `<i>Måndagsrabatt: 10 % på hela beställningen!</i>`;
     }
   }
   mondayDiscount();
+
+  let bulkMessage = '';
 
   function bulkDiscount() {
     /* mängdrabatt (filter/find)
@@ -181,6 +179,7 @@ function updateAndPrintCart(outputContainerId, options = {}) {
       product.totalPrice -= discount;
       totalOrderSum -= discount;
       totalSum -= discount;
+      bulkMessage += `<i>Mängdrabatt för ${product.name}: - ${discount} kr</i><br>`;
     }
    });
   }
@@ -189,10 +188,7 @@ function updateAndPrintCart(outputContainerId, options = {}) {
   // Kontrollera vilka produkter vi har i consolen
   console.log('purchased', purchasedProducts);
 
-  let outputHtml = `
-    <h2>${title}</h2>
-    <i>${shippingMessage}</i>
-  `;
+  let outputHtml = `<h2>${title}</h2>`;
 
   // Skriva ut produkter
   purchasedProducts.forEach(product => {
@@ -216,9 +212,12 @@ function updateAndPrintCart(outputContainerId, options = {}) {
 
   // Skriva ut totalsumma och frakt i cart
   outputHtml += `
-    <div class="cart-total"></div>
+    <div class="cart-total">
+      <span>${mondayMessage}</span>
+      <span>${bulkMessage}</span>
+      <br>
       <span>Pris: ${totalSum.toFixed(2)} kr </span>
-      <span>Frakt: ${totalShipping.toFixed(2)} kr </span>
+      <span>Frakt: ${totalShipping.toFixed(2)} kr <span>${shippingMessage}</span></span>
       <span class="total-order-sum">Totalt: ${totalOrderSum.toFixed(2)} kr</span>
     </div>
   `;
