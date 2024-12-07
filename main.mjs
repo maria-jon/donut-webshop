@@ -607,3 +607,48 @@ orderBtn.addEventListener('click', function(event) {
   });
 });
 
+// ------------------------------------------------
+// ------------ NOLLSTÄLLNINGS-TIMER -------------------
+// ------------------------------------------------
+
+let inactivityTimer;
+
+function tooSlow() {
+  const messageContainer = document.getElementById('timeoutMessage');
+  if (messageContainer) {
+    messageContainer.innerHTML = '<p>Du är för långsam, din session har avslutats!</p>';
+    messageContainer.style.display = 'block';
+  }
+
+  // Nollställ formuläret
+  const form = document.getElementById('orderForm');
+  if (form) {
+    form.reset();
+  }
+
+}
+
+// 
+function startInactivityTimer() {
+  // Rensa nuvarande timer
+  clearTimeout(inactivityTimer);
+
+  // Ställ timer på 15 minuter (900,000 ms) (5000 ms = 5sek)
+  inactivityTimer = setTimeout(tooSlow, 900000);
+}
+
+// Eventlyssnare för användaraktivitet
+function setupInactivityListeners() {
+  const form = document.getElementById('orderForm');
+  if (form) {
+    form.addEventListener('input', startInactivityTimer); // Reset timer on user input
+    form.addEventListener('click', startInactivityTimer); // Reset timer on clicks
+    form.addEventListener('mousemove', startInactivityTimer); // Optional: Reset timer on mouse move
+  }
+}
+
+// Starta timer när sidan laddas in
+document.addEventListener('DOMContentLoaded', () => {
+  setupInactivityListeners();
+  startInactivityTimer();
+});
