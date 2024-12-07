@@ -68,7 +68,9 @@ function decreaseProductCount(e) {
 
 function updateAndPrintCart(outputContainerId, options = {}) {
   const {
-    title = "Varukorgssammanställning",
+    title = 'Varukorgssammanställning',
+    titleSummary = 'I din varukorg just nu:',
+    orderInfo = false
   } = options;
 
   const outputContainer = document.getElementById(outputContainerId);
@@ -192,7 +194,10 @@ function updateAndPrintCart(outputContainerId, options = {}) {
   // Kontrollera vilka produkter vi har i consolen
   console.log('purchased', purchasedProducts);
 
-  let outputHtml = `<h2>${title}</h2>`;
+  let outputHtml = `
+    <h2>${title}</h2>
+    <i>${titleSummary}</i>
+  `;
 
   // Skriva ut produkter
   purchasedProducts.forEach(product => {
@@ -227,6 +232,14 @@ function updateAndPrintCart(outputContainerId, options = {}) {
       <span class="total-order-sum">Totalt: ${totalOrderSum.toFixed(2)} kr</span>
     </div>
   `;
+
+  if (orderInfo) {
+    outputHtml += `
+    <div class="order-info">
+    <span>Vi levererar munkarna om ca 30 minuter</span>
+    </div>
+    `;    
+  }
   outputContainer.innerHTML = outputHtml;
 }
 
@@ -582,49 +595,15 @@ function activateOrderButton() {
   }
 }
 
-function displayOrderSummary(purchasedProducts, totalShipping, totalOrderSum) {
-  const orderSummary = document.getElementById('orderSummary');
-  if (!orderSummary) {
-    console.error("Order summary container not found!");
-    return;
-  }
-
-  // Clear previous summary
-  orderSummary.innerHTML = '';
-
-  if (purchasedProducts.length === 0) {
-    orderSummary.innerHTML = '<p>Your cart is empty. Please add items to your cart.</p>';
-    return;
-  }
-
-  // Start building the order summary
-  let summaryHtml = '<h2>Order Summary</h2>';
-
-  purchasedProducts.forEach(product => {
-    const productTotal = product.amount * product.price;
-    summaryHtml += `
-      <div class="order-item">
-        <span><strong>${product.name}</strong>: ${product.amount} x ${product.price} kr</span>
-        <span>Total: ${productTotal.toFixed(2)} kr</span>
-      </div>
-    `;
-  });
-
-  summaryHtml += `
-    <div class="order-total">
-      <p>Shipping: ${totalShipping.toFixed(2)} kr</p>
-      <p><strong>Order Total: ${totalOrderSum.toFixed(2)} kr</strong></p>
-    </div>
-  `;
-
-  // Append the summary to the container
-  orderSummary.innerHTML = summaryHtml;
-}
-
 // Attach event listener to the "Order" button
 orderBtn.addEventListener('click', function(event) {
   event.preventDefault(); // hindrar sidan från att ladda om
 
   // skriver ut beställningsbekräftelsen
-  updateAndPrintCart('orderSummary', { title: 'Beställningsbekräftelse'});
+  updateAndPrintCart('orderSummary', { 
+    title: 'Beställningsbekräftelse',
+    titleSummary: 'Dina beställda varor:',
+    orderInfo: true
+  });
 });
+
