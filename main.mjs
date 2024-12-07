@@ -200,8 +200,10 @@ function updateAndPrintCart(outputContainerId, options = {}) {
         </div>
         <div class="cart-info">
           <span class="product-description">${product.description}</span>
-          <span>${product.amount} st</span>
-          <span class="product-price">${product.totalPrice.toFixed(2)} kr</span>
+          <div class="cart-amount-price">
+            <span>${product.amount} st</span>
+            <span class="product-price">${product.totalPrice.toFixed(2)} kr</span>
+          </div>
           <span class="material-icons" id="deleteItem">
             delete
           </span>

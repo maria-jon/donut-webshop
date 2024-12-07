@@ -68,18 +68,23 @@ button {
 
 
 // ---------- VARUKORG -----------
+/*
 .cart {
 	img {
 		max-height: 12vh;
 		width: auto;
 	}
-}
+}*/
 
 .cart-item {
 	display: flex;
 	justify-content: space-between;
 	padding: 1vh 2vw;
 	align-items: center;
+	img {
+		max-height: 12vh;
+		width: auto;
+	}
 }
 
 @for $i from 1 through length($colors) {
@@ -99,6 +104,10 @@ button {
 	span {
 		margin: 0.5rem;
 	}
+}
+
+.cart-amount-price {
+	
 }
 
 .cart-total {
