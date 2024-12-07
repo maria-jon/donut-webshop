@@ -46,7 +46,7 @@ input {
 }
 
 img {
-	max-width: 400px;
+	max-width: 100px;
 	height: auto;
 	display: block;
 }
@@ -68,13 +68,29 @@ button {
 
 
 // ---------- VARUKORG -----------
-/*
-.cart {
-	img {
-		max-height: 12vh;
-		width: auto;
+
+// Animation
+@keyframes colorShift {
+	0% {
+    	color: $lightteal; /* Original color */
 	}
-}*/
+	50% {
+  		color: $pink; /* Highlight color */
+	}
+	100% {
+  		color: $lightteal; /* Back to original color */
+	}
+}
+
+.color-shift {
+animation: colorShift 1s ease-in-out;
+}
+
+// 
+
+.total-order-sum {
+	color: $lightteal;
+}
 
 .cart-item {
 	display: flex;
