@@ -10,6 +10,8 @@ const categoryFilterRadios = document.querySelectorAll('[name="categoryFilter"]'
 const priceRangeSlider = document.querySelector('#priceRange');
 const currentRangeValue = document.querySelector('#currentRangeValue'); // priset som skrivs ut vid slidern
 
+// let cartMessage = document.getElementById('#cart-message');
+
 /*
 let filteredProducts = [...products];
 let filteredProductsInPriceRange = [];
@@ -18,8 +20,6 @@ let filteredProductsInPriceRange = [];
 // ------------------------------------------------
 // ------------ SHOW PRODUCTS IN CART -------------
 // ------------------------------------------------
-
-const cartMessage = document.querySelector('#cart-message');
 
 // ------------ ÖKA ANTAL -------------
 function increaseProductCount(e) {
@@ -67,14 +67,16 @@ function decreaseProductCount(e) {
 
 // ------------ SKRIVA UT PRODUKTER I KORGEN -------------
 
+const cartMessage = document.getElementById('#cart-message');
+
 function updateAndPrintCart(outputContainerId, options = {}) {
   const {
     title = "Varukorgssammanställning",
-    emptyMessage = "Your cart is empty.",
-    showShipping = true,
-    showDiscounts = false,
-    showTotals = true
   } = options;
+
+  const outputContainer = document.getElementById(outputContainerId);
+
+  let shippingMessage = '';
 
   /*
   ATT GÖRA
@@ -84,9 +86,6 @@ function updateAndPrintCart(outputContainerId, options = {}) {
   x totalsumma
   x om det inte finns några produkter så ska det skrivas ut att varukorgen är tom
   */
-
-
-  const outputContainer = document.getElementById(outputContainerId);
   
   if (!outputContainer) {
     console.error('Output container not found!');
@@ -120,6 +119,7 @@ function updateAndPrintCart(outputContainerId, options = {}) {
   x om det är mindre än 15 > 25 kr + 10% av totalsumma
   */
 
+
   // Räkna ut antal produkter i cart 
   const shippingAmount = purchasedProducts.reduce((total, product) => {
     return total + product.amount;
@@ -130,10 +130,15 @@ function updateAndPrintCart(outputContainerId, options = {}) {
   const calculateTotalShipping = (totalSum) => totalSum * 0.10 + 25;
   let totalShipping = shippingAmount < 15 ? calculateTotalShipping(totalSum) : 0;
 
+
   if (totalShipping === 0) {
+    /*
     cartMessage.innerHTML = '';
-    cartMessage.innerHTML += `<i>Gratis frakt!</i>`;
+    cartMessage.innerHTML += `<i>Gratis frakt!</i><br>`;
+    */
+   shippingMessage += `<i>Gratis frakt!</i>`;
   }
+
   // Räkna ut totalsumman
   let totalOrderSum = totalSum + totalShipping;
 
@@ -184,7 +189,10 @@ function updateAndPrintCart(outputContainerId, options = {}) {
   // Kontrollera vilka produkter vi har i consolen
   console.log('purchased', purchasedProducts);
 
-  let outputHtml = `<h2>${title}</h2>`;
+  let outputHtml = `
+    <h2>${title}</h2>
+    <i>${shippingMessage}</i>
+  `;
 
   // Skriva ut produkter
   purchasedProducts.forEach(product => {
