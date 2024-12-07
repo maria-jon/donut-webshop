@@ -10,7 +10,6 @@ const categoryFilterRadios = document.querySelectorAll('[name="categoryFilter"]'
 const priceRangeSlider = document.querySelector('#priceRange');
 const currentRangeValue = document.querySelector('#currentRangeValue'); // priset som skrivs ut vid slidern
 
-
 /*
 let filteredProducts = [...products];
 let filteredProductsInPriceRange = [];
@@ -90,6 +89,8 @@ function updateAndPrintCart(outputContainerId, options = {}) {
     return;
   }
 
+  let totalSum = 0;
+
   // Räkna ut antalet produkter i varukorgen
   const purchasedProducts = [];
   for (let i = 0; i < products.length; i++) {
@@ -107,7 +108,7 @@ function updateAndPrintCart(outputContainerId, options = {}) {
 
   // Räkna ut total summa för köpet
   let shippingCost = 0;
-  let totalSum = purchasedProducts.reduce((total, product) => {
+  totalSum = purchasedProducts.reduce((total, product) => {
     return total + product.amount * product.price;
   }, shippingCost);
 
@@ -185,6 +186,9 @@ function updateAndPrintCart(outputContainerId, options = {}) {
   }
   bulkDiscount(purchasedProducts);
 
+  disableInvoice(totalSum);
+
+
   // Kontrollera vilka produkter vi har i consolen
   console.log('purchased', purchasedProducts);
 
@@ -254,6 +258,7 @@ function weekendRaise(products) {
   }
 }
 weekendRaise(products);
+
 
 // ------------------------------------------------
 // ------------ SKRIVA UT RATING AV PRODUKTER ------------
@@ -492,6 +497,17 @@ function switchPaymentMethod(e) {
 
   selectedPaymentOption = e.target.value;
 }
+
+
+function disableInvoice(totalSum) {
+  const invoiceRadio = document.getElementById('invoiceRadio');
+  if (totalSum >= 800) {
+    invoiceRadio.disabled = true;
+  } else {
+    invoiceRadio.disabled = false;
+  }
+}
+
 
 function isPersonalIdNumberValid() {
   return personalIdRegEx.exec(personalID.value);
