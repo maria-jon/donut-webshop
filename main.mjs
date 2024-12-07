@@ -43,7 +43,7 @@ function increaseProductCount(e) {
   products[foundProductIndex].amount += 1;
 
   printProductsList(products);
-  updateAndPrintCart();
+  updateAndPrintCart('cart', { title: 'Varukorgssammanställning'});
 }
 
 // ------------ MINSKA ANTAL -------------
@@ -65,11 +65,20 @@ function decreaseProductCount(e) {
   products[foundProductIndex].amount -= 1;
 
   printProductsList(products);
-  updateAndPrintCart();
+  updateAndPrintCart('cart', { title: 'Varukorgssammanställning'});
 }
 
 // ------------ SKRIVA UT PRODUKTER I KORGEN -------------
-function updateAndPrintCart() {
+
+function updateAndPrintCart(outputContainerId, options = {}) {
+  const {
+    title = "Varukorgssammanställning",
+    emptyMessage = "Your cart is empty.",
+    showShipping = true,
+    showDiscounts = false,
+    showTotals = true
+  } = options;
+
   /*
   ATT GÖRA
   x en container i html (id/html-element) där produkterna skrivs ut
@@ -78,6 +87,14 @@ function updateAndPrintCart() {
   x totalsumma
   x om det inte finns några produkter så ska det skrivas ut att varukorgen är tom
   */
+
+
+  const outputContainer = document.getElementById(outputContainerId);
+  
+  if (!outputContainer) {
+    console.error('Output container not found!');
+    return;
+  }
 
   // Räkna ut antalet produkter i varukorgen
   const purchasedProducts = [];
@@ -88,6 +105,10 @@ function updateAndPrintCart() {
       // räkna ut totalsumman för produkten
       product.totalPrice = product.amount * product.price;
     }
+  }
+
+  if (purchasedProducts.length === 0) {
+    return;
   }
 
   // Räkna ut total summa för köpet
@@ -166,10 +187,11 @@ function updateAndPrintCart() {
   // Kontrollera vilka produkter vi har i consolen
   console.log('purchased', purchasedProducts);
 
+  let outputHtml = `<h2>${title}</h2>`;
+
   // Skriva ut produkter
-  cart.innerHTML = ''; // Rensa div
   purchasedProducts.forEach(product => {
-    cart.innerHTML += `
+    outputHtml += `
       <div class="cart-item">
         <div class="cart-name">
           <img src="${product.img.url}" alt="${product.img.alt}">
@@ -178,7 +200,7 @@ function updateAndPrintCart() {
         <div class="cart-info">
           <span class="product-description">${product.description}</span>
           <span>${product.amount} st</span>
-          <span class="product-price">${product.totalPrice} kr</span>
+          <span class="product-price">${product.totalPrice.toFixed(2)} kr</span>
           <span class="material-icons" id="deleteItem">
             delete
           </span>
@@ -188,13 +210,14 @@ function updateAndPrintCart() {
   });
 
   // Skriva ut totalsumma och frakt i cart
-  cart.innerHTML +=`
+  outputHtml += `
     <div class="cart-total"></div>
-      <span>Pris: ${totalSum} kr </span>
-      <span>Frakt: ${totalShipping} kr </span>
-      <span class="total-order-sum">Totalt: ${totalOrderSum} kr</span>
+      <span>Pris: ${totalSum.toFixed(2)} kr </span>
+      <span>Frakt: ${totalShipping.toFixed(2)} kr </span>
+      <span class="total-order-sum">Totalt: ${totalOrderSum.toFixed(2)} kr</span>
     </div>
   `;
+  outputContainer.innerHTML = outputHtml;
 }
 
 // ------------------------------------------------
@@ -219,7 +242,7 @@ function weekendRaise(products) {
     return
   } else {products.forEach(product => {
       const raise = product.price * 0.15;
-      console.log(`Helghöjning ${product.name}: +${raise} kr`);
+      /// console.log(`Helghöjning ${product.name}: +${raise} kr`);
       product.price += raise;
     });
   }
@@ -279,7 +302,7 @@ function printProductsList(productList) {
         <img src="${product.img.url}" alt="${product.img.alt}">
         <p class="product-description">${product.description}</p>
         <p>${getRatingHtml(product.rating)}</p>
-        <span class="product-price">${product.price} kr</span> 
+        <span class="product-price">${product.price.toFixed(2)} kr</span> 
         <div>
           <button class="decrease" id="decrease-${product.id}">-</button>
           <input type="number" min="0" value="${product.amount}" id="input-${product.id}">
@@ -373,6 +396,7 @@ function validateInput(inputElementId, checkSpecial = '') {
       case 'phoneNumber':
         hasSpecialError = !/^[0-9]{10}$/.test(inputValue);
         customErrorMessage = 'Endast siffror.';
+        isValid = false;
         break;
       case 'socialSecurityNumber':
         // Något annat
@@ -532,9 +556,49 @@ function activateOrderButton() {
   }
 }
 
-// Eventlyssnare för beställ-knapp
-orderBtn.addEventListener('click', order);
+function displayOrderSummary(purchasedProducts, totalShipping, totalOrderSum) {
+  const orderSummary = document.getElementById('orderSummary');
+  if (!orderSummary) {
+    console.error("Order summary container not found!");
+    return;
+  }
 
-function order (purchasedProducts) {
+  // Clear previous summary
+  orderSummary.innerHTML = '';
 
+  if (purchasedProducts.length === 0) {
+    orderSummary.innerHTML = '<p>Your cart is empty. Please add items to your cart.</p>';
+    return;
+  }
+
+  // Start building the order summary
+  let summaryHtml = '<h2>Order Summary</h2>';
+
+  purchasedProducts.forEach(product => {
+    const productTotal = product.amount * product.price;
+    summaryHtml += `
+      <div class="order-item">
+        <span><strong>${product.name}</strong>: ${product.amount} x ${product.price} kr</span>
+        <span>Total: ${productTotal.toFixed(2)} kr</span>
+      </div>
+    `;
+  });
+
+  summaryHtml += `
+    <div class="order-total">
+      <p>Shipping: ${totalShipping.toFixed(2)} kr</p>
+      <p><strong>Order Total: ${totalOrderSum.toFixed(2)} kr</strong></p>
+    </div>
+  `;
+
+  // Append the summary to the container
+  orderSummary.innerHTML = summaryHtml;
 }
+
+// Attach event listener to the "Order" button
+orderBtn.addEventListener('click', function(event) {
+  event.preventDefault(); // hindrar sidan från att ladda om
+
+  // skriver ut beställningsbekräftelsen
+  updateAndPrintCart('orderSummary', { title: 'Beställningsbekräftelse'});
+});

@@ -18,19 +18,18 @@
                 shopping_cart
               </span></button>
         </div>
-        <div class="cart">
+        <div class="cart" id="cart">
             <h2>Varukorgssammanställning</h2>
             <!--- lista med produkter som man lagt i varukorgen - generera med js --->
             <span id="cart-message"></span>
             <div id="cart-summary">
-                Din varukorg är tom.
+                <i>Din varukorg är tom.</i>
             </div>
         </div>
     </header>
 
     <main>
-
-		<section>
+		<section class="products">
 			<h2>Produkter</h2>
             <div id="filter-products">
                 <label>
@@ -66,7 +65,7 @@
 				<!--- fyller på från javascript --->
 			</div>
 		</section>
-        <section>
+        <section class="order-form">
             <h2>Beställningsformulär</h2>
             <form>
                 <span>Obligatoriska uppgifter är markerade med *.</span>
@@ -163,9 +162,15 @@
                         </label>
                     </div>
                     <button type="reset" value="Rensa info">Rensa info</button>
-                    <button id="orderBtn" disabled>Beställ</button>
+                    <button type="button" id="orderBtn">Beställ</button>
                 </div>
             </form>
+        </section>
+        <section class="order-summary">
+            <!--- <h2>Beställningsbekräftelse</h2> --->
+            <div id="orderSummary">
+                <!-- beställningsbekräftelse från js -->
+            </div>
         </section>
 	</main>
 
