@@ -5,8 +5,6 @@ import products from "./products.mjs";
 // ------------------------------------------------
 
 const productsListDiv = document.querySelector('#products-list');
-// const cartSummaryDiv = document.querySelector('#cart-summary');
-const productsSortDiv = document.querySelector('#filter-products');
 
 const categoryFilterRadios = document.querySelectorAll('[name="categoryFilter"]');
 const priceRangeSlider = document.querySelector('#priceRange');
@@ -21,7 +19,6 @@ let filteredProductsInPriceRange = [];
 // ------------ SHOW PRODUCTS IN CART -------------
 // ------------------------------------------------
 
-const cart = document.querySelector('#cart-summary');
 const cartMessage = document.querySelector('#cart-message');
 
 // ------------ ÖKA ANTAL -------------
@@ -250,7 +247,7 @@ function weekendRaise(products) {
 weekendRaise(products);
 
 // ------------------------------------------------
-// ------------ SKRIVER UT PRODUKTER I HTML ------------
+// ------------ SKRIVA UT RATING AV PRODUKTER ------------
 // ------------------------------------------------
 
 // Skriva ut rating
@@ -290,6 +287,10 @@ function getRatingHtml(rating) {
 
   return html;
 }
+
+// ------------------------------------------------
+// ------------ SKRIVA UT PRODUKTER I HTML ------------
+// ------------------------------------------------
 
 function printProductsList(productList) {
   // rensa div
