@@ -14,7 +14,7 @@
     <header> 
         <div class="header-top">
             <h1>Gottfrids webshop</h1>
-            <button id="cartBtn"><span class="material-icons">
+            <button id="cartBtn" aria-label="Varukorgssammanställning"><span class="material-icons">
                 shopping_cart
               </span></button>
         </div>
@@ -86,7 +86,9 @@
                     <div class="error-message"></div> 
                     <input type="text" name="address" id="address">
                 </label>
-                <label>Ev. portkod
+                <label>
+                    <span>Ev. portkod</span>
+                    <div class="error-message"></div> 
                     <input type="text" name="code">
                 </label>
                 <label>
@@ -168,14 +170,15 @@
                 </div>
             </form>
         </section>
-
+	</main>
+    <aside>
         <section class="order-summary">
             <!--- <h2>Beställningsbekräftelse</h2> --->
             <div id="orderSummary">
                 <!-- beställningsbekräftelse från js -->
             </div>
         </section>
-	</main>
+    </aside>
 
     <script type="module" src="/main.mjs"></script>
   </body>

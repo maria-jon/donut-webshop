@@ -137,13 +137,20 @@ animation: colorShift 1s ease-in-out;
 }
 
 .order-summary {
-	display: block;
-	height: 100vh;
-	width: 100vw;
+	margin-top: 1rem;
 }
 
 .order-info {
 	background-color: $cyan;
+}
+
+#orderSummary {
+	width: 90%;
+	margin: auto;
+	background-color: #FFF;
+	padding: 0.5rem;
+	border-radius: 1rem;
+	margin-bottom: 0.5rem;
 }
 
 // ---------- PRODUKTER ----------
@@ -196,9 +203,9 @@ form {
 
 .payment-options {
 	background-color: $cyan;
+	margin: 0.5rem;
 	border-radius: 8px;
 	padding: 8px;
-	border: 1px solid #262626;
 	span {
 		color: $teal;
 	}
@@ -246,3 +253,4 @@ form {
 	display: none; 
 	color: $pink;
 }
+
