@@ -245,10 +245,27 @@ function updateAndPrintCart(outputContainerId, options = {}) {
     </div>
   `;
 
+  let deliveryTime = '';
+
+  function estDelivery() {
+    const now = new Date();
+
+    // Lägga till 30 minuter 
+    const futureTime = new Date(now.getTime() + 30 * 60 * 1000);
+
+    // Formattera tiden
+    const options = { hour: '2-digit', minute: '2-digit', hour12: false };
+    const formattedTime = futureTime.toLocaleTimeString(undefined, options);
+
+    deliveryTime = formattedTime;
+  }
+
   if (orderInfo) {
+    estDelivery();
     outputHtml += `
     <div class="order-info">
-    <span>Vi levererar munkarna om ca 30 minuter</span>
+    <span>Leverans sker till din adress om ca 30 minuter. <br>
+    Vi räknar med att vara hos dig runt klockan ${deliveryTime}.</span>
     </div>
     `;    
   }
