@@ -73,42 +73,49 @@
                 <span>Obligatoriska uppgifter är markerade med *.</span>
                 <label>
                     <span>Förnamn</span> 
-                    <div class="error-message"></div> <!-- previousSibling till id="address" -->
+                    <div class="error-message">*</div> <!-- previousSibling till id="address" -->
+                    <br>
                     <input type="text" name="first-name" id="first-name">
                 </label>
                 <label>
                     <span>Efternamn</span> 
-                    <div class="error-message"></div> 
+                    <div class="error-message">*</div> 
+                    <br>
                     <input type="text" name="last-name" id="last-name">
                 </label>
                 <label>
                     <span>Adress</span> 
-                    <div class="error-message"></div> 
+                    <div class="error-message">*</div> 
+                    <br>
                     <input type="text" name="address" id="address">
                 </label>
                 <label>
                     <span>Ev. portkod</span>
-                    <div class="error-message"></div> 
+                    <br>
                     <input type="text" name="code">
                 </label>
                 <label>
                     <span>Postnummer</span> 
-                    <div class="error-message"></div> 
+                    <div class="error-message">*</div> 
+                    <br>
                     <input type="number" name="postcode" id="zip">
                 </label>
                 <label>
                     <span>Postort</span> 
-                    <div class="error-message"></div> 
+                    <div class="error-message">*</div> 
+                    <br>
                     <input type="text" name="city" id="city">
                 </label>
                 <label>
                     <span>Telefon</span> 
-                    <div class="error-message"></div> 
+                    <div class="error-message">*</div> 
+                    <br>
                     <input type="tel" name="phone" id="phone">
                 </label>
                 <label>
                     <span>Email</span> 
-                    <div class="error-message"></div> 
+                    <div class="error-message">*</div> 
+                    <br>
                     <input type="email" name="email" id="email">
                 </label>
                 <label>
@@ -139,7 +146,7 @@
                     <div class="invoice hidden" id="invoice">
                         <label>
                             <span>Personnummer</span>
-                            <div class="error-message"></div> 
+                            <div class="error-message">*</div> 
                             <input type="text" name="personal-id" id="personalID" value="19850505-1234">
                         </label>
                     </div>
@@ -147,13 +154,13 @@
                     <div class="card" id="card">
                         <label>
                             <span>Kortnummer</span>
-                            <div class="error-message"></div> 
+                            <div class="error-message">*</div> 
                             <input type="number" id="creditCardNumber" value="5100080000000000">
                         </label>
                         <label>
                             <span>Datum</span>
-                            <div class="error-message" id="errorYear"></div>
-                            <div class="error-message-month" id="errorMonth"></div>  
+                            <div class="error-message" id="errorYear">*</div>
+                            <div class="error-message-month" id="errorMonth">*</div>  
                             <span>
 
                                 <input type="number" class="small" placeholder="YY" id="creditCardYear">/<input type="number" class="small" placeholder="MM" id="creditCardMonth">
@@ -161,7 +168,7 @@
                         </label>
                         <label>
                             <span>CVC</span>
-                            <div class="error-message"></div> 
+                            <div class="error-message">*</div> 
                             <input type="number" placeholder="123" id="creditCardCvc">
                         </label>
                     </div>
