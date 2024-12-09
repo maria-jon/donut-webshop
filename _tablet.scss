@@ -1,0 +1,14 @@
+#products-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+
+}
+
+.product {
+    max-width: 40vw;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: space-around;
+}

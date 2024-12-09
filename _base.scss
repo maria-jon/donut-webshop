@@ -161,6 +161,7 @@ animation: colorShift 1s ease-in-out;
 }
 
 .product {
+	margin: 0 auto;
 	border-bottom: 2px solid black;
 	padding-bottom: 1rem;
 	h3 {
@@ -169,6 +170,9 @@ animation: colorShift 1s ease-in-out;
 	}
 	.product-price {
 		font-size: 2rem;
+	}
+	input {
+		max-width: 5vw;		
 	}
 }
 
