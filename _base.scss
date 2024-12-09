@@ -12,7 +12,7 @@ body {
 main {
 	max-width: 90%;
 	margin: auto;
-	background-color: white;
+	background-color: #FFF;
 	padding: 0.5rem;
 	border-radius: 1rem;
 }
@@ -79,7 +79,15 @@ button {
 animation: colorShift 1s ease-in-out;
 }
 
-// 
+
+.cart {
+	width: 90%;
+	margin: auto;
+	background-color: #FFF;
+	padding: 0.5rem;
+	border-radius: 1rem;
+	margin-bottom: 0.5rem;
+}
 
 .total-order-sum {
 	color: $lightteal;
