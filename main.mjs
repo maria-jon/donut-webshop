@@ -248,13 +248,6 @@ function updateAndPrintCart(outputContainerId, options = {}) {
 // ------------------------------------------------
 
 function weekendRaise(products) {
-  /* helghöjning
-    x är det fredag, lördag, söndag, eller måndag?
-    x om det är fredag innan 15:00 > return
-    x om det är måndag efter 03:00 > return
-    - annars > 15% extra pris på produkterna
-  */
-
   const today = new Date(); 
   
   if (today.getDay() == 2 || today.getDay() == 3 || today.getDay() == 4) { // om det inte är helg
@@ -263,7 +256,7 @@ function weekendRaise(products) {
     return
   } else if (today.getDay() == 1 && today.getHours() >= 3) { // om det är måndag efter kl 03
     return
-  } else {products.forEach(product => {
+  } else {products.forEach(product => { // 15% extra pris på produkterna
       const raise = product.price * 0.15;
       /// console.log(`Helghöjning ${product.name}: +${raise} kr`);
       product.price += raise;
@@ -276,8 +269,6 @@ weekendRaise(products);
 // ------------------------------------------------
 // ------------ SKRIVA UT RATING AV PRODUKTER ------------
 // ------------------------------------------------
-
-// Skriva ut rating
 function getRatingHtml(rating) {
   // Räkna ut hur många hela stjärnor
   const fullStars = Math.floor(rating);
@@ -363,8 +354,6 @@ printProductsList(products);
 function filterProducts() {
   let filteredProducts = [...products];
 
-  // Uppdatera filteredProducts utfirån val gjorda i gränssnittet
-  // const selectedCategory = document.querySelector('input[name="categoryFilter"]:checked').value; // säger vilken kategori som är vald 
   const selectedCategory =  document.querySelector('input[name="categoryFilter"]:checked').value; // säger vilken kategori som är vald 
   const selectedPrice = priceRangeSlider.value; // säger vilket pris som är valt 
 
