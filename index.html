@@ -14,7 +14,7 @@
     <header> 
         <div class="header-top">
             <h1>Gottfrids webshop</h1>
-            <button><span class="material-icons">
+            <button id="cartBtn"><span class="material-icons">
                 shopping_cart
               </span></button>
         </div>
@@ -30,7 +30,7 @@
     <main>
 		<section class="products">
 			<h2>Produkter</h2>
-            <div id="filter-products">
+            <div class="filter-products" id="filter-products">
                 <label>
                     <input type="radio" name="categoryFilter" value="sweet" id="sweet-radio" />
                     Sött
@@ -66,7 +66,7 @@
 		</section>
         <section class="order-form">
             <h2>Beställningsformulär</h2>
-            <div id="timeoutMessage">
+            <div class="timeout-message" id="timeoutMessage">
                 <!--- too slow -->
             </div>
             <form id="orderForm">

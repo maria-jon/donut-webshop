@@ -20,6 +20,10 @@ main {
 i {
 	color: $teal;
 }
+
+h2 {
+	font-size: 2.5rem;
+}
   
 
 .header-top {
@@ -143,9 +147,9 @@ animation: colorShift 1s ease-in-out;
 
 .product {
 	border-bottom: 2px solid black;
-	margin-bottom: 20px;
+	padding-bottom: 1rem;
 	h3 {
-		font-size: 2.5rem;
+		font-size: 2rem;
 		margin: 0.5rem;
 	}
 	.product-price {
@@ -160,10 +164,14 @@ animation: colorShift 1s ease-in-out;
 
 // ---------- FILTRERING ----------
 
-#filter-products {
-
+.filter-products {
+	background-color: $yellow;
+	border-radius: 1rem;
+	padding: 0.5rem;
+	margin: 0.5rem;
 	.flex {
-		max-width: 50%;
+		max-width: 80%;
+		margin: auto;
 		display: flex;
 		justify-content: space-around;
 	}
@@ -226,7 +234,7 @@ form {
 
 // ---------- TIMER ----------
 
-#timeoutMessage {
+.timeout-message {
 	display: none; 
 	color: $pink;
 }

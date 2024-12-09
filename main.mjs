@@ -322,7 +322,7 @@ function printProductsList(productList) {
         <p class="product-description">${product.description}</p>
         <p>${getRatingHtml(product.rating)}</p>
         <span class="product-price">${product.price.toFixed(2)} kr</span> 
-        <div>
+        <div class="change-amount">
           <button class="decrease" id="decrease-${product.id}">-</button>
           <input type="number" min="0" value="${product.amount}" id="input-${product.id}">
           <button class="increase" id="increase-${product.id}">+</button>
