@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="sv">
   <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <link rel="icon" type="image/svg+xml" href="/vite.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -20,7 +20,7 @@
         </div>
         <div class="cart hidden" id="cart">
             <h2>Varukorgssammanställning</h2>
-            <!--- lista med produkter som man lagt i varukorgen - generera med js --->
+            <!--- lista med produkter som man lagt i varukorgen - generera med js -->
             <div id="cart-summary">
                 <i>Din varukorg är tom.</i>
             </div>
@@ -32,19 +32,19 @@
 			<h2>Produkter</h2>
             <div class="filter-products" id="filter-products">
                 <label>
-                    <input type="radio" name="categoryFilter" value="sweet" id="sweet-radio" />
+                    <input type="radio" name="categoryFilter" value="sweet" id="sweet-radio">
                     Sött
                 </label>
                 <label>
-                    <input type="radio" name="categoryFilter" value="sour" id="sour-radio" />
+                    <input type="radio" name="categoryFilter" value="sour" id="sour-radio">
                     Surt
                 </label>
                 <label>
-                    <input type="radio" name="categoryFilter" value="vegan" id="vegan-radio" />
+                    <input type="radio" name="categoryFilter" value="vegan" id="vegan-radio">
                     Veganskt
                 </label>
                 <label>
-                    <input type="radio" name="categoryFilter" value="all"  id="all-radio" checked /> 
+                    <input type="radio" name="categoryFilter" value="all"  id="all-radio" checked> 
                     Alla
                 </label>
                 
@@ -53,7 +53,7 @@
                         <span>Prisintervall</span>
                         <span class="flex">
                             <span>0 kr</span>
-                            <input type="range" min="0" max="100" step="5" id="priceRange" /> <!--- Här kan man sätta step="10" för att sätta intervall på slidern --->
+                            <input type="range" min="0" max="100" step="5" id="priceRange">
                             <span>100 kr</span>
                         </span>
                         <span id="currentRangeValue">50</span>kr
@@ -61,7 +61,7 @@
                 </p>
             </div>
 			<div id="products-list">
-				<!--- fyller på från javascript --->
+				<!--- fyller på från javascript -->
 			</div>
 		</section>
         <section class="order-form">
@@ -73,19 +73,19 @@
                 <span>Obligatoriska uppgifter är markerade med *.</span>
                 <label>
                     <span>Förnamn</span> 
-                    <div class="error-message">*</div> <!-- previousSibling till id="address" -->
+                    <span class="error-message">*</span> <!-- previousSibling till id="address" -->
                     <br>
                     <input type="text" name="first-name" id="first-name">
                 </label>
                 <label>
                     <span>Efternamn</span> 
-                    <div class="error-message">*</div> 
+                    <span class="error-message">*</span> 
                     <br>
                     <input type="text" name="last-name" id="last-name">
                 </label>
                 <label>
                     <span>Adress</span> 
-                    <div class="error-message">*</div> 
+                    <span class="error-message">*</span> 
                     <br>
                     <input type="text" name="address" id="address">
                 </label>
@@ -96,25 +96,25 @@
                 </label>
                 <label>
                     <span>Postnummer</span> 
-                    <div class="error-message">*</div> 
+                    <span class="error-message">*</span> 
                     <br>
                     <input type="number" name="postcode" id="zip">
                 </label>
                 <label>
                     <span>Postort</span> 
-                    <div class="error-message">*</div> 
+                    <span class="error-message">*</span> 
                     <br>
                     <input type="text" name="city" id="city">
                 </label>
                 <label>
                     <span>Telefon</span> 
-                    <div class="error-message">*</div> 
+                    <span class="error-message">*</span> 
                     <br>
                     <input type="tel" name="phone" id="phone">
                 </label>
                 <label>
                     <span>Email</span> 
-                    <div class="error-message">*</div> 
+                    <span class="error-message">*</span> 
                     <br>
                     <input type="email" name="email" id="email">
                 </label>
@@ -146,7 +146,7 @@
                     <div class="invoice hidden" id="invoice">
                         <label>
                             <span>Personnummer</span>
-                            <div class="error-message"></div> 
+                            <span class="error-message"></span> 
                             <input type="text" name="personal-id" id="personalID" value="19850505-1234">
                         </label>
                     </div>
@@ -154,21 +154,20 @@
                     <div class="card" id="card">
                         <label>
                             <span>Kortnummer</span>
-                            <div class="error-message"></div> 
+                            <span class="error-message"></span> 
                             <input type="number" id="creditCardNumber" value="5100080000000000">
                         </label>
                         <label>
                             <span>Datum</span>
-                            <div class="error-message" id="errorYear"></div>
-                            <div class="error-message-month" id="errorMonth"></div>  
+                            <span class="error-message" id="errorYear"></span>
+                            <span class="error-message-month" id="errorMonth"></span>  
                             <span>
-
                                 <input type="number" class="small" placeholder="YY" id="creditCardYear">/<input type="number" class="small" placeholder="MM" id="creditCardMonth">
                             </span>
                         </label>
                         <label>
                             <span>CVC</span>
-                            <div class="error-message"></div> 
+                            <span class="error-message"></span> 
                             <input type="number" placeholder="123" id="creditCardCvc">
                         </label>
                     </div>
@@ -180,7 +179,7 @@
 	</main>
     <aside>
         <section class="order-summary">
-            <!--- <h2>Beställningsbekräftelse</h2> --->
+            <!--- <h2>Beställningsbekräftelse</h2> -->
             <div id="orderSummary">
                 <!-- beställningsbekräftelse från js -->
             </div>
