@@ -24,7 +24,6 @@ const cartBtn = document.getElementById('cartBtn');
 cartBtn.addEventListener('click', () => {
   // toggla om varukorgen visas
   cart.classList.toggle('hidden');
-
 });
 
 
