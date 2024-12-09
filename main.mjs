@@ -16,7 +16,20 @@ let filteredProductsInPriceRange = [];
 */
 
 // ------------------------------------------------
-// ------------ SHOW PRODUCTS IN CART -------------
+// ------------ ÖPPNA VARUKORG -------------
+// ------------------------------------------------
+
+const cartBtn = document.getElementById('cartBtn');
+
+cartBtn.addEventListener('click', () => {
+  // toggla om varukorgen visas
+  cart.classList.toggle('hidden');
+
+});
+
+
+// ------------------------------------------------
+// ------------ VISA PRODUKTER I VARUKORG -------------
 // ------------------------------------------------
 
 // ------------ ÖKA ANTAL -------------
