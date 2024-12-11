@@ -44,7 +44,7 @@ const products = [
         url: "./images/honungsgladje.jpg",
         width: 2000,
         height: 3000,
-        alt: 'Stack of donuts'
+        alt: 'En trave med munkar'
       },
     },
     {

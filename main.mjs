@@ -217,7 +217,7 @@ function updateAndPrintCart(outputContainerId, options = {}) {
       <div class="cart-item">
         <div class="cart-name">
           <div class="product-image">
-            <img src="${product.img.url}" alt="${product.img.alt}">
+            <img src="${product.img.url}" alt="${product.img.alt}" width="${product.img.width}" height="${product.img.height}" loading="lazy">
           </div>
           <h3 class>${product.name}</h3> 
         </div>
@@ -347,7 +347,7 @@ function printProductsList(productList) {
       <article class="product">
         <h3>${product.name}</h3>
         <div class="product-image">
-          <img src="${product.img.url}" alt="${product.img.alt}">
+          <img src="${product.img.url}" alt="${product.img.alt}" width="${product.img.width}" height="${product.img.height}" loading="lazy">
         </div>
         <p class="product-description">${product.description}</p>
         <p>${getRatingHtml(product.rating)}</p>
