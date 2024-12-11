@@ -5,6 +5,7 @@
 body {
 	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 	font-size: 1.2rem;
+	color: $teal;
 	background-color: $yellow;
 }
 
@@ -27,7 +28,7 @@ i {
 
 h1 {
 	font-size: 2.3rem;
-	color: #FFF;
+	color: $teal;
 	text-shadow: 0 0.5rem 0.8rem $lightteal;
 }
 
@@ -62,6 +63,7 @@ input {
 button {
 	padding: 0.5rem 1rem;
 	font-size: 1.2rem;
+	font-weight: 700;
 	background-color: $pink;
 	border: 0;
 	border-radius: 0.5rem;
