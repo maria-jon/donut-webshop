@@ -216,7 +216,9 @@ function updateAndPrintCart(outputContainerId, options = {}) {
     outputHtml += `
       <div class="cart-item">
         <div class="cart-name">
-          <img src="${product.img.url}" alt="${product.img.alt}">
+          <div class="product-image">
+            <img src="${product.img.url}" alt="${product.img.alt}">
+          </div>
           <h3 class>${product.name}</h3> 
         </div>
         <div class="cart-info">
