@@ -7,7 +7,7 @@ const products = [
       rating: 4,
       amount: 0,
       category: 'sweet',
-      description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.', 
+      description: 'WOW! Den saftigaste, magiska jordgubbsexplosionen du NÅGONSIN kommer smaka! 🚀🍓', 
       img: {
         url: "./images/jordgubbsmagi.jpg",
         width: 2500,
@@ -23,7 +23,7 @@ const products = [
       rating: 3,
       amount: 0,
       category: 'sweet',
-      description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+      description: 'ALL CHOKLAD, HELA TIDEN! En dekadent dröm som aldrig slutar ge! 🍫✨',
       img: {
         url: "./images/chokladfrossa.jpg",
         width: 2000,
@@ -39,7 +39,7 @@ const products = [
       rating: 1.5,
       amount: 0,
       category: 'sweet',
-      description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+      description: 'GYLLENE GLÄDJE! Sötheten som buzzar rakt in i ditt hjärta! 🐝💛',
       img: {
         url: "./images/honungsgladje.jpg",
         width: 2000,
@@ -55,7 +55,7 @@ const products = [
       rating: 4.5,
       amount: 0,
       category: 'sour',
-      description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+      description: 'REGNBÅGAR! FÄRGER! LYCKA! Denna munk är en FEST i varje tugga! 🌈🎉',
       img: {
         url: "./images/regnbagsring.jpg",
         width: 2000,
@@ -71,7 +71,7 @@ const products = [
       rating: 2.5,
       amount: 0,
       category: 'sweet',
-      description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+      description: 'FLUFFIGARE än moln, VARMARE än solen, och KRYDDIGARE än din dag! ☁️🔥',
       img: {
         url: "./images/kanelfluff.jpg",
         width: 1800,
@@ -87,7 +87,7 @@ const products = [
       rating: 3,
       amount: 0,
       category: 'vegan',
-      description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+      description: 'KLASSIKERN! ENKELHET I SIN MEST DELIKATA FORM - HELT OEMOTSTÅNDLIG! 🍩💥',
       img: {
         url: "./images/sockersot.jpg",
         width: 1800,
@@ -103,7 +103,7 @@ const products = [
       rating: 3.5,
       amount: 0,
       category: 'sweet',
-      description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+      description: 'SMIDIG, LEN, DRÖMMIG! Vaniljen du kommer tänka på HELA NATTEN! 😍🌙',
       img: {
         url: "./images/vaniljdrom.jpg",
         width: 3000,
@@ -119,7 +119,7 @@ const products = [
       rating: 4,
       amount: 0,
       category: 'vegan',
-      description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+      description: 'KARAMELLKAVALKADET! VARJE TUGGA EN VIRVEL AV GLÄDJE OCH SOCKER! 🎠🍯',
       img: {
         url: "./images/karamellsnurra.jpg",
         width: 2000,
@@ -135,7 +135,7 @@ const products = [
       rating: 2,
       amount: 0,
       category: 'vegan',
-      description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+      description: 'DENNA ÄR FÖR DIG! Frisk, fräsch och HELT PERFEKT – som du! 🍐🌟',
       img: {
         url: "./images/paronparla.jpg",
         width: 1500,
@@ -151,7 +151,7 @@ const products = [
       rating: 4.5,
       amount: 0,
       category: 'sour',
-      description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+      description: 'KISSY KISSY! Syrligt, sött, som en KÄRLEKSBOMB rakt i munnen! 💋🍋',
       img: {
         url: "./images/citronkyss.jpg",
         width: 2000,
