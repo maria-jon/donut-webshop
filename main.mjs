@@ -350,7 +350,7 @@ function printProductsList(productList) {
           <img src="${product.img.url}" alt="${product.img.alt}" width="${product.img.width}" height="${product.img.height}" loading="lazy">
         </div>
         <p class="product-description">${product.description}</p>
-        <p>${getRatingHtml(product.rating)}</p>
+        <p aria-description="Betyg ${product.rating} av 5">${getRatingHtml(product.rating)}</p>
         <span class="product-price">${product.price.toFixed(2)} kr</span> 
         <div class="change-amount">
           <button class="decrease" id="decrease-${product.id}">-</button>
