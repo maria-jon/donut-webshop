@@ -8,6 +8,10 @@ body {
 	background-color: $yellow;
 }
 
+header {
+	position: sticky;
+	top: 0.5rem;
+}
 
 main {
 	max-width: 90%;
@@ -21,6 +25,12 @@ i {
 	color: $teal;
 }
 
+h1 {
+	font-size: 2.5rem;
+	color: #FFF;
+	text-shadow: 0 0.5rem 0.8rem $lightteal;
+}
+
 h2 {
 	font-size: 2.5rem;
 }
@@ -30,12 +40,15 @@ h2 {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
-	margin: 0.5rem;
-	padding: 0.5rem 0;
+	margin: 0.5rem 0.5rem 0 0.5rem;
+	padding: 0.8rem 0;
 	background-color: cyan;
 	border-radius: 1rem;
+
 	button {
-		padding: 0.3rem 1.5rem;
+		padding: 0 1.5rem;
+		box-shadow: 0 0.5rem 0.8rem $lightteal;
+		margin: 0.5rem 0;
 	}
 }
 
@@ -76,11 +89,13 @@ animation: colorShift 1s ease-in-out;
 
 .cart {
 	width: 90%;
+	height: 50vh;
 	margin: auto;
 	background-color: #FFF;
 	padding: 0.5rem;
 	border-radius: 1rem;
-	margin-bottom: 0.5rem;
+	border: 0.5rem solid $yellow;
+	overflow: scroll;
 }
 
 .total-order-sum {
