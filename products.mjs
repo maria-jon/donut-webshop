@@ -9,10 +9,10 @@ const products = [
       category: 'sweet',
       description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.', 
       img: {
-        url: "./images/annie-spratt-jstQCOhzyQA-unsplash.jpg",
-        width: 1000,
-        height: 450,
-        alt: 'Stack of donuts'
+        url: "./images/jordgubbsmagi.jpg",
+        width: 2500,
+        height: 3098,
+        alt: 'Trave med fyra munkar'
       },
     },
     {
@@ -25,10 +25,10 @@ const products = [
       category: 'sweet',
       description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
       img: {
-        url: "./images/elena-koycheva-PFzy4N0_R3M-unsplash.jpg",
-        width: 500,
-        height: 500,
-        alt: 'Two donuts'
+        url: "./images/chokladfrossa.jpg",
+        width: 2000,
+        height: 1333,
+        alt: 'Två chokladmunkar'
       },
     },
     {
@@ -41,9 +41,9 @@ const products = [
       category: 'sweet',
       description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
       img: {
-        url: "./images/annie-spratt-jstQCOhzyQA-unsplash.jpg",
-        width: 1000,
-        height: 450,
+        url: "./images/honungsgladje.jpg",
+        width: 2000,
+        height: 3000,
         alt: 'Stack of donuts'
       },
     },
@@ -57,10 +57,10 @@ const products = [
       category: 'sour',
       description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
       img: {
-        url: "./images/annie-spratt-jstQCOhzyQA-unsplash.jpg",
-        width: 1000,
-        height: 450,
-        alt: 'Stack of donuts'
+        url: "./images/regnbagsring.jpg",
+        width: 2000,
+        height: 2500,
+        alt: 'Trave med tre munkar'
       },
     },
     {
@@ -73,9 +73,9 @@ const products = [
       category: 'sweet',
       description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
       img: {
-        url: "./images/annie-spratt-jstQCOhzyQA-unsplash.jpg",
-        width: 1000,
-        height: 450,
+        url: "./images/kanelfluff.jpg",
+        width: 1800,
+        height: 2654,
         alt: 'Stack of donuts'
       },
     },
@@ -89,10 +89,10 @@ const products = [
       category: 'vegan',
       description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
       img: {
-        url: "./images/annie-spratt-jstQCOhzyQA-unsplash.jpg",
-        width: 1000,
-        height: 450,
-        alt: 'Stack of donuts'
+        url: "./images/sockersot.jpg",
+        width: 1800,
+        height: 2699,
+        alt: 'Munkar med socker'
       },
     },
     {
@@ -105,10 +105,10 @@ const products = [
       category: 'sweet',
       description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
       img: {
-        url: "./images/annie-spratt-jstQCOhzyQA-unsplash.jpg",
-        width: 1000,
-        height: 450,
-        alt: 'Stack of donuts'
+        url: "./images/vaniljdrom.jpg",
+        width: 3000,
+        height: 1987,
+        alt: 'Två munkar med chokladtopping'
       },
     },
     {
@@ -121,10 +121,10 @@ const products = [
       category: 'vegan',
       description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
       img: {
-        url: "./images/annie-spratt-jstQCOhzyQA-unsplash.jpg",
-        width: 1000,
-        height: 450,
-        alt: 'Stack of donuts'
+        url: "./images/karamellsnurra.jpg",
+        width: 2000,
+        height: 3563,
+        alt: 'Munkar med karamelltopping'
       },
     },
     {
@@ -137,10 +137,10 @@ const products = [
       category: 'vegan',
       description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
       img: {
-        url: "./images/annie-spratt-jstQCOhzyQA-unsplash.jpg",
-        width: 1000,
-        height: 450,
-        alt: 'Stack of donuts'
+        url: "./images/paronparla.jpg",
+        width: 1500,
+        height: 2672,
+        alt: 'Fem munkar med grön topping'
       },
     },
     {
@@ -153,10 +153,10 @@ const products = [
       category: 'sour',
       description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
       img: {
-        url: "./images/annie-spratt-jstQCOhzyQA-unsplash.jpg",
-        width: 1000,
-        height: 450,
-        alt: 'Stack of donuts'
+        url: "./images/citronkyss.jpg",
+        width: 2000,
+        height: 3000,
+        alt: 'Tallrik med en munk'
       },
     },
   ];

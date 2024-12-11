@@ -225,9 +225,6 @@ function updateAndPrintCart(outputContainerId, options = {}) {
             <span>${product.amount} st</span>
             <span class="product-price">${product.totalPrice.toFixed(2)} kr</span>
           </div>
-          <span class="material-icons" id="deleteItem">
-            delete
-          </span>
         </div>
       </div>
     `;
@@ -347,7 +344,9 @@ function printProductsList(productList) {
     newHTML += `
       <article class="product">
         <h3>${product.name}</h3>
-        <img src="${product.img.url}" alt="${product.img.alt}">
+        <div class="product-image">
+          <img src="${product.img.url}" alt="${product.img.alt}">
+        </div>
         <p class="product-description">${product.description}</p>
         <p>${getRatingHtml(product.rating)}</p>
         <span class="product-price">${product.price.toFixed(2)} kr</span> 
