@@ -1,7 +1,9 @@
 
-# Webshop for donuts
+# Webshop for donut store
 
 School project in Javascript to create a webshop selling donuts. 
+
+[Link to live version](https://medieinstitutet.github.io/fed24d-js-intro-inl-1-webshop-maria-jon/)
 
 
 ## Tech Stack
@@ -26,28 +28,50 @@ School project in Javascript to create a webshop selling donuts.
 
 
 ## Screenshots
-Desktop, tablet, and mobile view:
+
+### Design
+
+#### Desktop, tablet, and mobile view
 ![Desktop view](/screenshots/desktop-view.png)
 ![Tablet view](/screenshots/tablet-view.png)
 ![Mobile view](/screenshots/mobile-view.png)
 
-Cart view:
+#### Cart view
 ![Tablet and desktop cart](/screenshots/tablet-cart.png)
 ![Mobile cart 1](/screenshots/mobile-cart-1.png)
 ![Mobile cart 2](/screenshots/mobile-cart-2.png)
 
-Order form:
+#### Order form
 ![Desktop order form](/screenshots/desktop-order-form.png)
 ![Mobile order form](/screenshots/mobile-order-form.png)
 
-Order confirmation:
+#### Order confirmation
 ![Desktop order confirmation](/screenshots/desktop-order-confirmation.png)
 ![Tablet order confirmation and order form](/screenshots/tablet-order-confirmation.png)
 ![Mobile order confirmation](/screenshots/mobile-order-confirmation.png)
 
-Tab order: 
+#### Tab order
 ![Tab order 1](/screenshots/tab-order-1.png)
 ![Tab order 2](/screenshots/tab-order-2.png)
+
+### Lighthouse report
+![Lighthouse 1](/screenshots/lighthouse-1.jpg)
+![Lighthouse 2](/screenshots/lighthouse-2.jpg)
+![Lighthouse 3](/screenshots/lighthouse-3.jpg)
+![Lighthouse 4](/screenshots/lighthouse-4.jpg)
+
+### Validation
+#### HTML
+![HTML Validation 1](/screenshots/html-validation-1.jpg)
+![HTML Validation 2](/screenshots/html-validation-2.jpg)
+![HTML Validation 3](/screenshots/html-validation-3.jpg)
+![HTML Validation 4](/screenshots/html-validation-4.jpg)
+![HTML Validation 5](/screenshots/html-validation-5.jpg)
+
+#### CSS
+![CSS Validation 1](/screenshots/css-validation-1.jpg)
+![CSS Validation 2](/screenshots/css-validation-2.jpg)
+![CSS Validation 3](/screenshots/css-validation-3.jpg)
 
 ## Authors
 - [@maria-jon](https://github.com/maria-jon)
