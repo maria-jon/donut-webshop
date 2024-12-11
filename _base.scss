@@ -167,17 +167,14 @@ animation: colorShift 1s ease-in-out;
 }
 
 .product-image {
+	display: block;
 	max-width: 100%;
 	height: 50vh;
-	overflow: hidden;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 
 	img {
-		max-width: 100%;
-		height: auto;
-		display: block;
+		object-fit: cover;
+		width: 100%;
+		height: 100%;
 	}
 }
 
