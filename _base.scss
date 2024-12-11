@@ -140,9 +140,6 @@ animation: colorShift 1s ease-in-out;
 	margin-top: 1rem;
 }
 
-.order-info {
-}
-
 #orderSummary {
 	width: 90%;
 	margin: auto;
@@ -233,6 +230,9 @@ form {
 	.selector {
 		margin-block: 16px;
 		text-align: center;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
 	}
   
 	input.small {
