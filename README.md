@@ -49,6 +49,9 @@ Tab order:
 ![Tab order 1](/screenshots/tab-order-1.png)
 ![Tab order 2](/screenshots/tab-order-2.png)
 
+## Authors
+- [@maria-jon](https://github.com/maria-jon)
+
 ## Acknowledgements
 
 ### Photo credits
