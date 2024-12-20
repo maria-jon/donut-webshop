@@ -3,7 +3,7 @@
 
 School project in Javascript to create a webshop selling donuts. 
 
-[Link to live version](https://medieinstitutet.github.io/fed24d-js-intro-inl-1-webshop-maria-jon/)
+[Link to live version](https://maria-jon.github.io/donut-webshop/)
 
 
 ## Tech Stack
